@@ -1,0 +1,45 @@
+<div class="table-container">
+  <div>
+    <h1>Lista de Funcionários</h1>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>CPF</th>
+        <th>RG</th>
+        <th>Nascimento</th>
+        <th>Endereço</th>
+        <th>Bairro</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+        <th>Telefone</th>
+        <th>Tel Comercial</th>
+        <th>Ramal</th>
+        <th>Email</th>
+        <th>Departamento</th>
+        <th>Cargo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{employee.NOME}}</td>
+        <td>{{employee.SOBRENOME}}</td>
+        <td>{{employee.CPF}}</td>
+        <td>{{employee.RG}}</td>
+        <td>{{employee.DATA_NASCTO}}</td>
+        <td>{{employee.ENDERECO}}</td>
+        <td>{{employee.BAIRRO}}</td>
+        <td>{{employee.CIDADE}}</td>
+        <td>{{employee.ESTADO}}</td>
+        <td>{{employee.TELEFONE}}</td>
+        <td>{{employee.TEL_COMERCIAL}}</td>
+        <td>{{employee.RAMAL}}</td>
+        <td>{{employee.EMAIL}}</td>
+        <td>{{employee.DEPARTAMENTO}}</td>
+        <td>{{employee.CARGO}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

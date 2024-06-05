@@ -1,0 +1,11 @@
+/* employee-form.component.css */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
+}

@@ -1,0 +1,27 @@
+<div class="table-container">
+  <div>
+    <h1>CARGOS</h1>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          CARGO
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let role of roles">
+        <td>
+          {{role.ID}}
+        </td>
+        <td>
+          {{role.DESCRICAO}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

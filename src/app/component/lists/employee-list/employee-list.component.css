@@ -1,0 +1,25 @@
+table{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+td, tr, th{
+  border: 1px solid rgb(197, 197, 197);
+  padding: 10px;
+  font-size: 12px;
+}
+.table-container {
+  margin-top: 100px; /* Ajuste conforme necessário para evitar que a tabela fique atrás do cabeçalho */
+  overflow-x: auto; /* Adiciona uma barra de rolagem horizontal caso a tabela seja maior que a tela */
+}
+
+table {
+  width: 100%; /* Define a largura da tabela como 100% do contêiner pai */
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
