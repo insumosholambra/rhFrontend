@@ -3,6 +3,8 @@ import { environment } from '../../../environment/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Employee } from '../../../model/employee.model';
+import { Department } from '../../../model/department.model';
+import { Role } from '../../../model/role.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +23,10 @@ export class EmployeeListService {
     return this.http.get<any>(`${this.api}/users`)
   }
 
-  allRoles(): Observable<Employee[]>{
+
+
+
+  allRoles(): Observable<Role[]>{
     return this.http.get<any>(`${this.api}/role`)
   }
 }

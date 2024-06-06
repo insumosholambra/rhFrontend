@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Role } from '../../model/role.model';
+import { Role } from '../../../model/role.model';
 import Swal from 'sweetalert2';
 import { RoleService } from './role.service';
 import { CommonModule } from '@angular/common';

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Employee } from '../../model/employee.model';
+import { Employee } from '../../../model/employee.model';
 import { RegisterService } from './register.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ListRoleService } from '../lists/list-role/list-role.service';
+import { ListRoleService } from '../../lists/list-role/list-role.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 
@@ -19,10 +19,12 @@ export class RegisterComponent {
 
   employeeForm!: FormGroup;
 
-  constructor(private fb: FormBuilder,
+  departamentos: any
+
+  constructor(
+    private fb: FormBuilder,
     private registerService: RegisterService,
     private roleService: ListRoleService
-
   ) {
     this.employeeForm = this.fb.group({
       NOME: ['', Validators.required],
@@ -45,6 +47,7 @@ export class RegisterComponent {
 
   ngOnInit(){
     this.getRoles();
+    this.getDepartments();
   }
 
   onSubmit(): void {
@@ -86,6 +89,15 @@ export class RegisterComponent {
         console.error('Error parsing response:', error);
       }
     );
+  }
+
+  getDepartments(){
+    this.registerService.allDepartments().subscribe(
+      response => {
+        this.departamentos = response
+
+      }
+    )
   }
 
 

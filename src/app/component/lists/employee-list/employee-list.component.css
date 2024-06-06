@@ -1,6 +1,5 @@
 table{
   margin-top: 10px;
-  margin-left: 10px;
 }
 
 td, tr, th{
@@ -9,6 +8,7 @@ td, tr, th{
   font-size: 12px;
 }
 .table-container {
+  margin-left: 20px;
   margin-top: 100px; /* Ajuste conforme necessário para evitar que a tabela fique atrás do cabeçalho */
   overflow-x: auto; /* Adiciona uma barra de rolagem horizontal caso a tabela seja maior que a tela */
 }

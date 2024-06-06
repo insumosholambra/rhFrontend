@@ -10,5 +10,5 @@ import { LayoutComponent } from './component/layout/layout.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'front-end';
+  title = 'Portal Interno | R.H';
 }

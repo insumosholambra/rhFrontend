@@ -1,0 +1,13 @@
+<body>
+  <div>
+    <h1>Envio de Arquivos</h1>
+    <h5>Mostre aos funcionários, qualquer documento que desejar</h5>
+    <h6>Utilize apenas arquivos em formato PDF, e anexe apenas um por vez</h6>
+    <input
+      type="file"
+      ng-file-model="testFile"
+      (change)="onFileSelected($event)"
+    />
+    <button class="btn btn-success" (click)="enviar()">Enviar</button>
+  </div>
+</body>

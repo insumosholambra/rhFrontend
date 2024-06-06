@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environment/environment';
+import { environment } from '../../../environment/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Role } from '../../model/role.model';
+import { Role } from '../../../model/role.model';
 import Swal from 'sweetalert2';
 
 @Injectable({

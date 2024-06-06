@@ -15,6 +15,7 @@ export class HomeComponent {
 
 
 
+
   constructor(
     private router: Router
   ) { }
@@ -24,7 +25,7 @@ export class HomeComponent {
   }
 
   registerRole() {
-    this.router.navigate(['/home/role'])
+    this.router.navigate(['/home/role-register'])
   }
 
   list() {
@@ -34,12 +35,32 @@ export class HomeComponent {
   listRoles() {
     this.router.navigate(['/home/role-list'])
   }
+  registerDepartments() {
+    this.router.navigate(['/home/department-register'])
+  }
+
+  listDepartments() {
+    this.router.navigate(['/home/department-list'])
+  }
+
+  readDocs() {
+    this.router.navigate(['/home/docs-list'])
+  }
+
+  sendDocs() {
+    this.router.navigate(['/home/docs-register'])
+  }
 
   vacations() {
     throw new Error('Method not implemented.');
   }
+
   myProfile() {
     throw new Error('Method not implemented.');
   }
+
+  // myProfile() {
+  //   throw new Error('Method not implemented.');
+  // }
 
 }

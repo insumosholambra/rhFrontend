@@ -1,0 +1,27 @@
+<div class="table-container">
+  <div>
+    <h1>DEPARTAMENTOS</h1>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          DEPARTAMENTO
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let department of departments">
+        <td>
+          {{department.ID}}
+        </td>
+        <td>
+          {{department.DESCRICAO}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,7 +1,32 @@
-*, a{
+*, a {
   color: aliceblue;
 }
 
-.container-fluid{
+.container-fluid {
   width: 100%;
+}
+
+button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fd9d43;
+  color: white;
+
+}
+
+button:hover {
+  background-color: white;
+  color: #fd9d43;
+}
+
+.house-icon {
+  fill: #fff; /* Cor ao passar o mouse: vermelho */
+  transition: fill 0.1s ease; /* Transição suave */
+}
+
+button:hover .house-icon {
+  fill: #fd9d43; /* Cor padrão: preto */
+
 }

@@ -25,7 +25,6 @@ export class ListRoleComponent {
 
   getAllRoles(){
     this.roleService.getAllRoles().subscribe(response => {
-      console.log(response);
 
       this.roles = response
 
