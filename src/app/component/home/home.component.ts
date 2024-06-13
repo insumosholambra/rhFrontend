@@ -3,22 +3,35 @@ import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { LayoutComponent } from '../layout/layout.component';
 import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [LayoutComponent],
+  imports: [LayoutComponent, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
 
 
+  isRh: boolean = false
 
 
   constructor(
     private router: Router
   ) { }
+
+  ngOnInit(){
+    this.getUserRole()
+  }
+
+  getUserRole(){
+    const departamento = localStorage.getItem('departamento')
+    if(departamento == 'R.H'){
+      this.isRh = true
+    }
+  }
 
   register() {
     this.router.navigate(['/home/register'])
@@ -52,7 +65,7 @@ export class HomeComponent {
   }
 
   vacations() {
-    throw new Error('Method not implemented.');
+    this.router.navigate(['/vacation'])
   }
 
   myProfile() {

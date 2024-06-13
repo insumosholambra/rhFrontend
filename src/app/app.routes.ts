@@ -1,5 +1,4 @@
-// app.component.ts ou app-routing.module.ts
-import { Routes } from '@angular/router';
+import { provideRouter, Routes } from '@angular/router';
 import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
 import { RegisterComponent } from './component/cadastros/register/register.component';
@@ -12,11 +11,11 @@ import { DepartmentComponent } from './component/cadastros/department/department
 import { DepartmentListComponent } from './component/lists/department-list/department-list.component';
 import { PdfComponent } from './component/pdf/pdf.component';
 import { DocsListComponent } from './component/lists/docs-list/docs-list.component';
+import { holidayRoutes } from './component/holiday/holiday-routes';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-
   {
     path: 'home',
     component: LayoutComponent,
@@ -32,5 +31,8 @@ export const routes: Routes = [
       { path: 'docs-register', component: PdfComponent },
       { path: 'docs-list', component: DocsListComponent },
     ]
-  }
+  },
+  ...holidayRoutes
 ];
+
+export const appRoutes = provideRouter(routes);

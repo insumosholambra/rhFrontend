@@ -2,7 +2,7 @@
 
   <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
     <div class="row">
-      <h1 style="margin-left: 40%; margin-bottom: 50px;">Cadastro de Funcionários</h1>
+      <h1>Cadastro de Funcionários</h1>
       <div class="col-md-6">
         <div class="form-group">
           <label for="nome">Nome</label>
@@ -26,7 +26,11 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="estado">Estado</label>
-          <input type="text" id="estado" formControlName="ESTADO" class="form-control">
+          <select name="estado" id="estado" class="form-control" formControlName="ESTADO">
+            <option value="">Selecione um estado</option>
+            <option *ngFor="let sigla of siglas" [value]="sigla">{{ sigla }}</option>
+          </select>
+          <!-- <input type="text" id="estado" formControlName="ESTADO" class="form-control"> -->
         </div>
       </div>
     </div>
@@ -99,7 +103,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="departamento">Departamento</label>
           <select formControlName="DEPARTAMENTO" class="form-control">
@@ -108,16 +112,35 @@
           </select>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="cargo">Cargo</label>
-          <select formControlName="CARGO" class="form-control">
+          <select   class="form-control" formControlName="CARGO">
             <option value="">Selecione um cargo</option>
             <option *ngFor="let cargo of cargos" [value]="cargo.DESCRICAO">{{ cargo.DESCRICAO }}</option>
           </select>
         </div>
       </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="DATA_CADASTRO">Data de Contratação</label>
+          <input type="date" id="DATA_CADASTRO" formControlName="DATA_CADASTRO" class="form-control">
+        </div>
+      </div>
+
+
     </div>
-    <button type="submit" class="btn btn-success">Salvar</button>
+
+    <div class="row">
+      <div class="col-md-4">
+        <label for="">Data de retorno da última férias</label>
+        <input type="date" formControlName="ULTIMO_PERIODO_FERIAS" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label for="">Saldo de férias</label>
+        <input type="text" formControlName="SALDO_FERIAS" class="form-control">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success mt-4">Salvar</button>
   </form>
 </div>

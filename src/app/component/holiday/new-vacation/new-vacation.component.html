@@ -1,0 +1,40 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+  <div class="container">
+    <h1 class="text-center mt-5">Solicitar Férias</h1>
+    <div class="row mt-5" *ngIf="isAvailable">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" formControlName="NOME_FUNCIONARIO" class="form-control" />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="inicioFerias">Data de Início das Férias</label>
+          <input type="date" id="inicioFerias" formControlName="DATA_INICIO_FERIAS" class="form-control"  />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="fimFerias">Data Final das Férias</label>
+          <input type="date" id="fimFerias" formControlName="DATA_FIM_FERIAS" class="form-control"  />
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div class="alert alert-info" role="alert">
+          Você tem {{this.daysAvailable}} dias disponíveis.
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4" *ngIf="isAvailable">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-success">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+</form>

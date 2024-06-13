@@ -25,4 +25,8 @@ export class RegisterService {
     return this.http.get<any>(`${this.api}/departments`)
   }
 
+  getStates(): Observable<any>{
+    return this.http.get<any>('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+  }
+
 }

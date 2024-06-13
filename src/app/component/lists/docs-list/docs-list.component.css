@@ -13,3 +13,20 @@ th, td {
 th {
   background-color: #f2f2f2;
 }
+
+html{
+  height: 85%;
+}
+
+.btn{
+  border: 1px solid #dddddd;
+}
+
+.div{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+
+}

@@ -30,6 +30,10 @@ constructor(
 onSubmit(){
   if(this.departmentForm.valid){
     this.departmentService.newDepartment(this.departmentForm.value)
+    Swal.fire({
+      icon: 'success',
+      title: 'Departamento cadastrado.'
+    })
   } else {
     Swal.fire({
       icon: 'error',

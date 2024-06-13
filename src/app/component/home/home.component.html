@@ -1,15 +1,18 @@
 <div class="group">
   <div class="grid-container">
-    <div>
+    <div *ngIf="isRh">
+
       <button class="btn" (click)="register()">Cadastro de funcionários</button>
     </div>
     <div>
       <button class="btn" (click)="list()">Lista de Funcionários</button>
     </div>
-    <div>
+    <div *ngIf="isRh">
+
       <button class="btn" (click)="registerRole()">Cadastro de cargos</button>
     </div>
-    <div>
+    <div *ngIf="isRh">
+
       <button class="btn" (click)="registerDepartments()">Cadastro de departamentos</button>
     </div>
     <div>
@@ -27,7 +30,7 @@
     <div>
       <button class="btn" (click)="readDocs()">Documentos e Arquivos</button>
     </div>
-    <div>
+    <div *ngIf="isRh">
       <button class="btn" (click)="sendDocs()">Envio de arquivos</button>
     </div>
   </div>

@@ -37,6 +37,11 @@ export class HeaderComponent {
     this.router.navigate(['/home'])
   }
 
+  exit(){
+    this.router.navigate(['/login'])
+    localStorage.clear()
+  }
+
 
 
 }

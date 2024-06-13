@@ -35,6 +35,8 @@ export class EmployeeListComponent implements OnInit {
     EMAIL: '',
     DEPARTAMENTO: '',
     CARGO: '',
+    SALDO_FERIAS: 0,
+    ULTIMO_PERIODO_FERIAS: 0
   }
 
 

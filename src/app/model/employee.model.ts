@@ -17,4 +17,6 @@ export interface Employee {
   EMAIL: string;
   DEPARTAMENTO: string;
   CARGO: string;
+  ULTIMO_PERIODO_FERIAS: number;
+  SALDO_FERIAS: number;
 }

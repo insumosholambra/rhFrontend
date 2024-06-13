@@ -6,12 +6,10 @@
     <title>Lista de Arquivos</title>
   </head>
   <body>
-    <div>
-
+    <div class="div">
       <div>
-        <h1>Lista de Arquivos</h1>
+        <h1>Documentos e Arquivos</h1>
       </div>
-
       <table>
         <thead>
           <tr>
@@ -22,7 +20,7 @@
         <tbody id="fileList">
           <tr *ngFor="let item of docs">
             <td>{{ item }}</td>
-            <td><button (click)="download(item)">Baixar</button></td>
+            <td><button (click)="download(item)" class="btn">Baixar</button></td>
           </tr>
         </tbody>
       </table>

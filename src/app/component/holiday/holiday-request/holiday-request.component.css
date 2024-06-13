@@ -1,0 +1,51 @@
+.table-container {
+  margin: 0 auto; /* Define as margens automáticas horizontalmente para centralizar */
+  width: 85%; /* Define a largura da tabela */
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid rgb(133, 133, 133);
+  padding: 8px;
+  text-align: center; /* Centraliza o conteúdo das células */
+}
+
+.actions button {
+  padding: 10px 15px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+}
+
+.actions .approve {
+  background-color: #4CAF50; /* Green background */
+}
+
+.actions .approve:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.actions .reject {
+  background-color: #f44336; /* Red background */
+}
+
+.actions .reject:hover {
+  background-color: #e53935; /* Darker red on hover */
+}
+
+.actions button:disabled {
+  background-color: #ccc; /* Grey background for disabled buttons */
+  cursor: not-allowed; /* Not-allowed cursor for disabled buttons */
+}

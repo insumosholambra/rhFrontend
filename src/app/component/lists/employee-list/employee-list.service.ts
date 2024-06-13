@@ -24,6 +24,11 @@ export class EmployeeListService {
   }
 
 
+  userById(id: number): Observable<Employee[]>{
+    return this.http.get<any>(`${this.api}/users/${id}`)
+  }
+
+
 
 
   allRoles(): Observable<Role[]>{

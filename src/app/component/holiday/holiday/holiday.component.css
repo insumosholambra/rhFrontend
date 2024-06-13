@@ -22,7 +22,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../../../assets/Logo_sem_texto.png');
+  background-image: url('../../../../assets/Logo_sem_texto.png');
   background-repeat: no-repeat;
   background-size: 50%;
   background-position: center;
@@ -48,4 +48,7 @@
 .group {
   height: 85%;
   padding: 5%;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
 }

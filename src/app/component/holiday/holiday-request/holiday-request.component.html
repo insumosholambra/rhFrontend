@@ -1,0 +1,41 @@
+<div class="table-container">
+  <div>
+    <h1>Solicitações de Férias</h1>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Data de Admissão</th>
+        <th>Data da última férias</th>
+        <th>Dias tirados na última férias</th>
+        <th>Saldo</th>
+        <th>Data Inicio Férias</th>
+        <th>Data Fim Férias</th>
+        <th>Status Solicitação</th>
+        <th>Ação</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vacation of vacations">
+        <td>{{vacation.ID_FUNCIONARIO}}</td>
+        <td>{{vacation.NOME_FUNCIONARIO}}</td>
+        <td>{{formatDate(vacation.DATA_ADMISSAO)}}</td>
+        <td>{{formatDate(vacation.DATA_ULTIMAS_FERIAS)}}</td>
+        <td>{{vacation.DIAS_GOZADOS}}</td>
+        <td>{{vacation.SALDO_ATUAL}}</td>
+        <td>{{formatDate(vacation.DATA_INICIO_FERIAS)}}</td>
+        <td>{{formatDate(vacation.DATA_FIM_FERIAS)}}</td>
+        <td>{{vacation.STATUS_SOLICITACAO}}</td>
+        <td class="actions">
+          <button class="approve" title="Aprovar">A</button>
+          <button class="reject" title="Reprovar">R</button>
+        </td>
+
+
+      </tr>
+    </tbody>
+  </table>
+</div>

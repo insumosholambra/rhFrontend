@@ -1,0 +1,18 @@
+
+<div class="group">
+  <div>
+    <h1>Férias</h1>
+  </div>
+  <div class="grid-container">
+
+    <div *ngIf="isRh">
+      <button class="btn" (click)="request()">Solicitações de Férias</button>
+    </div>
+    <div *ngIf="isRh">
+      <button class="btn" (click)="list()">Férias Agendadas</button>
+    </div>
+    <div>
+      <button class="btn" (click)="newVacation()">Solicitar Férias</button>
+    </div>
+  </div>
+</div>

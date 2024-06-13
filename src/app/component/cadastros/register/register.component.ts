@@ -20,6 +20,7 @@ export class RegisterComponent {
   employeeForm!: FormGroup;
 
   departamentos: any
+  siglas: any = ''
 
   constructor(
     private fb: FormBuilder,
@@ -42,12 +43,17 @@ export class RegisterComponent {
       EMAIL: ['', [Validators.required, Validators.email]],
       DEPARTAMENTO: ['', Validators.required],
       CARGO: ['', Validators.required],
+      DATA_CADASTRO: ['', Validators.required],
+      ULTIMO_PERIODO_FERIAS: ['', Validators.required],
+      SALDO_FERIAS: ['', Validators.required]
+
     });
   }
 
   ngOnInit(){
     this.getRoles();
     this.getDepartments();
+    this.getNameStates();
   }
 
   onSubmit(): void {
@@ -55,10 +61,10 @@ export class RegisterComponent {
 
     if (this.employeeForm.valid) {
       const employeeData: Employee = this.employeeForm.value;
-      console.log(employeeData);
 
-      this.registerService.newEmployee(employeeData).subscribe(
-        response => {
+
+      this.registerService.newEmployee(employeeData).subscribe({
+        next: (response) => {
           console.log('Resposta do servidor:', response);
           Swal.fire({
             title: 'Funcionário cadastrado com sucesso',
@@ -68,16 +74,20 @@ export class RegisterComponent {
               this.employeeForm.reset();
               window.location.reload();
             }
-          })
+          });
         },
-        error => {
+        error: (error) => {
           console.error('Erro na requisição:', error);
+        },
+        complete: () => {
+          // Opcional: algo que você queira fazer quando o Observable completar
         }
-      );
+      });
     } else {
       console.error('Formulário inválido');
     }
   }
+
 
   cargos: any
   getRoles() {
@@ -99,6 +109,17 @@ export class RegisterComponent {
       }
     )
   }
+
+
+  getNameStates() {
+    this.registerService.getStates().subscribe(response => {
+      // Mapeando a resposta para obter apenas as siglas
+      this.siglas = response.map((estado: any) => estado.sigla);
+
+      console.log(this.siglas);
+    });
+  }
+
 
 
 }
