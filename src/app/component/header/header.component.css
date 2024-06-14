@@ -22,11 +22,15 @@ button:hover {
 }
 
 .house-icon {
-  fill: #fff; /* Cor ao passar o mouse: vermelho */
-  transition: fill 0.1s ease; /* Transição suave */
+  fill: #fff;
+  transition: fill 0.1s ease;
 }
 
 button:hover .house-icon {
-  fill: #fd9d43; /* Cor padrão: preto */
+  fill: #fd9d43;
 
+}
+
+.back{
+  padding: 20px;
 }

@@ -1,17 +1,19 @@
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private location: Location
   ){}
 
 
@@ -23,6 +25,10 @@ export class HeaderComponent {
   name: string = ''
   cargo: any
 
+
+  back() {
+    this.location.back();
+  }
 
   getName(){
     const nome = localStorage.getItem('name')

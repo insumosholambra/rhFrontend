@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./holiday.component.css']
 })
 export class HolidayComponent {
-  isRh: boolean = true;
+  isRh: any
 
   constructor(private router: Router) { }
 
@@ -20,7 +20,11 @@ export class HolidayComponent {
 
   getDepartment() {
     const department = localStorage.getItem('departamento');
-    if (department === 'RH') {
+    console.log(department);
+
+    if (department == 'R.H') {
+      console.log('true');
+
       this.isRh = true;
     }
   }

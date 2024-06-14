@@ -4,19 +4,19 @@
   <div class="container">
     <h1 class="text-center mt-5">Solicitar Férias</h1>
     <div class="row mt-5" *ngIf="isAvailable">
-      <div class="col-md-4">
+      <!-- <div class="col-md-4">
         <div class="form-group">
           <label for="nome">Nome</label>
           <input type="text" id="nome" formControlName="NOME_FUNCIONARIO" class="form-control" />
         </div>
-      </div>
-      <div class="col-md-4">
+      </div> -->
+      <div class="col-md-6">
         <div class="form-group">
           <label for="inicioFerias">Data de Início das Férias</label>
           <input type="date" id="inicioFerias" formControlName="DATA_INICIO_FERIAS" class="form-control"  />
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="fimFerias">Data Final das Férias</label>
           <input type="date" id="fimFerias" formControlName="DATA_FIM_FERIAS" class="form-control"  />
@@ -25,13 +25,29 @@
     </div>
     <div class="row mt-4">
       <div class="col-md-12">
-        <div class="alert alert-info" role="alert">
+        <div class="alert alert-info">
           Você tem {{this.daysAvailable}} dias disponíveis.
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="alert alert-warning" role="alert">
+          <div style="font-weight: bold;"><br>Ponto de Atenção:</div>
+          As férias devem ser solicitadas com 2 meses de antecendência.
+          <br>
+          <br>
+          O período aquisitivo é regido pelo artigo 130 da CLT, abrangendo os 12 meses de serviço completados pelo funcionário na empresa. Em outras palavras, a cada ciclo de 12 meses, ele conquista o direito de desfrutar do período de férias.
+          <br>
+          <br>O artigo 134 estabelece que as férias devem ser concedidas pelo empregador em um único período, nos 12 meses seguintes ao momento em que o empregado adquire esse direito.
+          <br>
+          <br>Conforme estipulado pela lei, o início das férias não pode coincidir com os dois dias que precedem o período de descanso semanal remunerado. Isso significa que os trabalhadores que desfrutam de folga aos sábados e domingos, ou apenas aos domingos, não têm permissão para iniciar suas férias na sexta-feira.
+          <br>
+          <br>De acordo com as normativas da CLT, é vedado ao colaborador iniciar seu período de repouso anual dois dias antes de um feriado ou durante um final de semana.
+
         </div>
       </div>
     </div>
     <div class="row mt-4" *ngIf="isAvailable">
-      <div class="col-md-12">
+      <div class="col-md-12 mb-4">
         <button type="submit" class="btn btn-success">Enviar</button>
       </div>
     </div>

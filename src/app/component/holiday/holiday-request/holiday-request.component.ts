@@ -3,23 +3,27 @@ import { Component } from '@angular/core';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { HolidayRequestService } from './holiday-request.service';
 import { HttpClientModule } from '@angular/common/http';
+import { EmployeeListService } from '../../lists/employee-list/employee-list.service';
+import { forkJoin, map } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-holiday-request',
   standalone: true,
   imports: [CommonModule, NgbTooltipModule, HttpClientModule],
   templateUrl: './holiday-request.component.html',
-  styleUrl: './holiday-request.component.css',
-  providers: [HolidayRequestService]
+  styleUrls: ['./holiday-request.component.css'],
+  providers: [HolidayRequestService, EmployeeListService],
 })
 export class HolidayRequestComponent {
-  vacations: any;
+  vacations: any[] = [];
 
   constructor(
-    private holidayService: HolidayRequestService
-  ){}
+    private holidayService: HolidayRequestService,
+    private employeeListService: EmployeeListService
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.getAllRequests();
   }
 
@@ -28,31 +32,97 @@ export class HolidayRequestComponent {
       return ''; // Ou qualquer valor padrão que você prefira, como 'Data inválida'
     }
 
-    // Verifica se a string está no formato esperado
     const datePattern = /^\d{4}-\d{2}-\d{2}$/;
-    if (!dateString.match(datePattern)) {
-      throw new Error("Formato de data inválido. Use o formato yyyy-mm-dd.");
+    const isoPattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
+
+    if (dateString.match(datePattern)) {
+      const [year, month, day] = dateString.split('-');
+      return `${day}/${month}/${year}`;
+    } else if (dateString.match(isoPattern)) {
+      const date = new Date(dateString);
+      const day = String(date.getUTCDate()).padStart(2, '0');
+      const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+      const year = date.getUTCFullYear();
+      return `${day}/${month}/${year}`;
+    } else {
+      throw new Error(
+        'Formato de data inválido. Use o formato yyyy-mm-dd ou ISO 8601.'
+      );
     }
-
-    // Divide a string de data em partes
-    const [year, month, day] = dateString.split('-');
-
-    // Retorna a data formatada como dd/mm/yyyy
-    return `${day}/${month}/${year}`;
   }
 
+  getAllRequests() {
+    this.holidayService.getRequests().subscribe((res) => {
+      if (res && Array.isArray(res)) {
+        const employeeRequests = res.map((request) => {
+          if (!request.DATA_ULTIMAS_FERIAS) {
+            request.DATA_ULTIMAS_FERIAS = 0;
+          }
+          return this.employeeListService.userById(request.ID_FUNCIONARIO).pipe(
+            map((employee) => ({
+              ...request,
+              employeeName: employee
+                ? `${employee.NOME} ${employee.SOBRENOME}`
+                : 'Desconhecido',
+              dataAdmissao: employee ? employee.DATA_CADASTRO : null,
+              saldo: employee ? employee.SALDO_FERIAS : null,
+            }))
+          );
+        });
 
-  getAllRequests(){
-    this.holidayService.getRequests().subscribe(res => {
-      console.log(res);
-      if(res.DATA_ULTIMAS_FERIAS == null || res.DATA_ULTIMAS_FERIAS == ''){
-        res.DATA_ULTIMAS_FERIAS = 0
+        forkJoin(employeeRequests).subscribe(
+          (detailedRequests) => {
+            this.vacations = detailedRequests;
+          },
+          (error) => {
+            console.error('Error fetching employee details:', error);
+          }
+        );
       }
-      this.vacations = res
-
-
-    })
-
+    });
   }
 
+  approve(data: any) {
+    const newStatus = 'APROVADO';
+    console.log(data);
+    const ID = data.ID_SOLICITACAO;
+
+    this.holidayService.approveRequest(ID, newStatus).subscribe(
+      () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Férias aprovadas',
+        }).then((res) => {
+          if (res.isConfirmed) {
+            window.location.reload();
+          }
+        });
+      },
+      (error) => {
+        console.error(`Erro ao aprovar solicitação de férias ${ID}:`, error);
+      }
+    );
+  }
+
+  reject(data: any) {
+    const newStatus = 'REPROVADO';
+    console.log(data);
+    const ID = data.ID_SOLICITACAO;
+
+    this.holidayService.approveRequest(ID, newStatus).subscribe(
+      () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Férias reprovadas',
+        }).then((res) => {
+          if (res.isConfirmed) {
+            window.location.reload();
+          }
+        });
+      },
+      (error) => {
+        console.error(`Erro ao aprovar solicitação de férias ${ID}:`, error);
+      }
+    );
+  }
 }

@@ -13,6 +13,7 @@ export interface Employee {
   ESTADO: string;
   TELEFONE: string;
   TEL_COMERCIAL: string;
+  DATA_CADASTRO: number;
   RAMAL: string;
   EMAIL: string;
   DEPARTAMENTO: string;

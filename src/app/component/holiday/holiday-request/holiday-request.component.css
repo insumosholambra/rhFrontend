@@ -1,6 +1,6 @@
 .table-container {
-  margin: 0 auto; /* Define as margens automáticas horizontalmente para centralizar */
-  width: 85%; /* Define a largura da tabela */
+  margin: 0 auto;
+  width: 85%;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -28,6 +28,8 @@ th, td {
   font-size: 16px;
   color: white;
 }
+
+
 
 .actions .approve {
   background-color: #4CAF50; /* Green background */

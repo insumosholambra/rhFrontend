@@ -46,8 +46,10 @@
 }
 
 .group {
-  height: 85%;
-  padding: 5%;
+  height: 65%;
+  padding: 5% 5%;
+  padding-top: 0;
+  padding-bottom: 0;
   display: flex;
     flex-direction: column;
     align-items: center;
