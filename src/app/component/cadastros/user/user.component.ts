@@ -5,6 +5,7 @@ import { ListRoleService } from '../../lists/role-list/list-role.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../core/services/user.service';
+import { Department } from '../../../model/department.model';
 
 @Component({
   selector: 'app-user',
@@ -17,8 +18,8 @@ import { UserService } from '../../../core/services/user.service';
 export class UserComponent {
 
   employeeForm!: FormGroup;
-  employee: Employee[] = []
-  departamentos: any;
+  employee: Employee[] = [];
+  departamentos: Department[] = [];
   siglas: any = '';
   cargos: any;
 
@@ -41,8 +42,8 @@ export class UserComponent {
       TEL_COMERCIAL: [''],
       RAMAL: [''],
       EMAIL: ['', [Validators.required, Validators.email]],
-      DEPARTAMENTO: ['', Validators.required], // Aqui é o ID do departamento
-      CARGO: ['', Validators.required],
+      DEPARTAMENTO: [0, Validators.required],
+      CARGO: [0, Validators.required],
       DATA_CADASTRO: ['', Validators.required],
       ULTIMO_PERIODO_FERIAS: ['', Validators.required],
       SALDO_FERIAS: ['', Validators.required]
@@ -59,19 +60,30 @@ export class UserComponent {
     console.log(this.employeeForm.value);
 
     if (this.employeeForm.valid) {
+      const departmentId = this.employeeForm.get('DEPARTAMENTO')?.value;
+      const cargoId = this.employeeForm.get('CARGO')?.value;
+
       const employeeData: Employee = {
         ...this.employeeForm.value,
         DEPARTAMENTO: {
-          ID: this.employeeForm.get('DEPARTAMENTO.ID')?.value,
-          DESCRICAO: this.departamentos.find((dep: any) => dep.ID === this.employeeForm.get('DEPARTAMENTO.ID')?.value)?.DESCRICAO || ''
+          ID: departmentId,
+          DESCRICAO: this.departamentos.find(dep => dep.ID === departmentId)?.DESCRICAO || ''
+        },
+        CARGO: {
+          ID: cargoId,
+          DESCRICAO: this.cargos.find((cargo: { ID: any; }) => cargo.ID === cargoId)?.DESCRICAO || ''
         }
       };
+
+      console.log(employeeData);
 
       this.userService.newEmployee(employeeData).subscribe({
         next: (response) => {
           console.log('Resposta do servidor:', response);
           Swal.fire({
-            title: 'Funcionário cadastrado com sucesso',
+            title: 'Sucesso',
+            icon: 'success',
+            text: 'Funcionário cadastrado com sucesso',
             confirmButtonText: 'Ok'
           }).then(result => {
             if (result.isConfirmed) {
@@ -91,7 +103,6 @@ export class UserComponent {
     } else {
       console.error('Formulário inválido');
 
-      // Exibindo alerta com campos inválidos no Swal
       let errorFields = '';
       Object.keys(this.employeeForm.controls).forEach(field => {
         const control = this.employeeForm.get(field);
@@ -102,7 +113,6 @@ export class UserComponent {
 
       Swal.fire('Atenção!', `Os seguintes campos estão inválidos: ${errorFields}`, 'warning');
 
-      // Marcando campos inválidos no próprio formulário
       Object.keys(this.employeeForm.controls).forEach(field => {
         const control = this.employeeForm.get(field);
         if (control?.invalid) {
@@ -111,7 +121,6 @@ export class UserComponent {
       });
     }
   }
-
 
   getRoles() {
     this.roleService.getAllRoles().subscribe(
@@ -128,6 +137,8 @@ export class UserComponent {
     this.userService.allDepartments().subscribe(
       response => {
         this.departamentos = response;
+        console.log(this.departamentos);
+
       },
       error => {
         console.error('Erro ao obter departamentos:', error);
@@ -138,7 +149,6 @@ export class UserComponent {
   getNameStates() {
     this.userService.getStates().subscribe(
       response => {
-        // Mapeando a resposta para obter apenas as siglas
         this.siglas = response.map((estado: any) => estado.sigla);
       },
       error => {

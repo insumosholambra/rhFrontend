@@ -18,10 +18,9 @@ export class DepartmentService {
   ngOnInit(){}
 
 
-  allDepartments(){}
 
   newDepartment(department: any): Observable<any> {
-    return this.http.post<any>(` http://localhost:3000/departments`, department);
+    return this.http.post<any>(`${this.api}/departments`, department);
   }
 
   allDepartment(){

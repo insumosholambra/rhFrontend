@@ -25,8 +25,14 @@ export class RoleService {
         response => {
           console.log('Resposta do servidor:', response);
           Swal.fire({
-            title: 'Cargo inserido com sucesso',
+            icon: 'success',
+            title: 'Sucesso',
+            text: 'Cargo cadastrado com sucesso',
             confirmButtonText: 'Ok'
+          }).then(res => {
+            if(res.isConfirmed){
+              window.location.reload();
+            }
           })
         },
         error => {
