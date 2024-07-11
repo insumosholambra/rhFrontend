@@ -1,0 +1,21 @@
+<div class="table-container">
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Início</th>
+      <th>Fim</th>
+      <th>Dias</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of scheduled">
+      <td>{{item.EMPLOYEE_NAME}}</td>
+      <td>{{formatDate(item.DATA_INICIO_FERIAS)}}</td>
+      <td>{{formatDate(item.DATA_FIM_FERIAS)}}</td>
+      <td>{{item.PERIOD_DAYS}} dias</td>
+    </tr>
+  </tbody>
+</table>
+</div>

@@ -2,15 +2,17 @@ import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { LayoutComponent } from '../layout/layout.component';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { ProfileComponent } from '../profile/profile.component';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [LayoutComponent, CommonModule],
+  imports: [LayoutComponent, CommonModule, ProfileComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  providers: [UserService]
 })
 export class HomeComponent {
 

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environment/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Department } from '../../../model/department.model';
+import { environment } from '../../environment/environment';
+import { Department } from '../../model/department.model';
+import { Employee } from '../../model/employee.model';
 
 @Injectable({
   providedIn: 'root',
 
 })
-export class RegisterService {
+export class UserService {
 
   constructor(
     private http: HttpClient
@@ -16,6 +17,9 @@ export class RegisterService {
 
   api = environment.apiURI
 
+  getUserData(id: number): Observable<Employee> {
+    return this.http.get<Employee>(`${this.api}/users/${id}`);
+  }
 
   newEmployee(user: any): Observable<any> {
     return this.http.post<any>(`${this.api}/users`, user);

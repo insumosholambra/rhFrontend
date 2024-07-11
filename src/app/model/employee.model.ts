@@ -1,4 +1,6 @@
-// employee.model.ts
+import { Department } from "./department.model";
+import { Role } from "./role.model";
+
 export interface Employee {
   ID: number;
   PASSWORD: string;
@@ -13,11 +15,11 @@ export interface Employee {
   ESTADO: string;
   TELEFONE: string;
   TEL_COMERCIAL: string;
-  DATA_CADASTRO: number;
+  DATA_CADASTRO: string;
   RAMAL: string;
-  EMAIL: string;
-  DEPARTAMENTO: string;
-  CARGO: string;
-  ULTIMO_PERIODO_FERIAS: number;
-  SALDO_FERIAS: number;
+  EMAIL: string | null;
+  DEPARTAMENTO: Department;
+  CARGO: Role;
+  ULTIMO_PERIODO_FERIAS: string | null;
+  SALDO_FERIAS: number | null;
 }

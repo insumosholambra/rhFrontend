@@ -1,18 +1,21 @@
 <div class="container">
-
+  <div class="alert alert-warning" role="alert">
+    CADASTRO INICIAL DOS FUNCIONÁRIOS JÁ CONTRATADOS. APÓS A INSERÇÃO DE TODOS
+    OS FUNCIONÁRIOS, ESSE FORMULÁRIO SERÁ ALTERADO
+  </div>
   <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <h1>Cadastro de Funcionários</h1>
       <div class="col-md-6">
         <div class="form-group">
           <label for="nome">Nome</label>
-          <input type="text" id="nome" formControlName="NOME" class="form-control">
+          <input type="text" id="nome" formControlName="NOME" class="form-control" />
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="sobrenome">Sobrenome</label>
-          <input type="text" id="sobrenome" formControlName="SOBRENOME" class="form-control">
+          <input type="text" id="sobrenome" formControlName="SOBRENOME" class="form-control" />
         </div>
       </div>
     </div>
@@ -20,7 +23,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="cidade">Cidade de Nascimento</label>
-          <input type="text" id="cidade" formControlName="CIDADE" class="form-control">
+          <input type="text" id="cidade" formControlName="CIDADE" class="form-control" />
         </div>
       </div>
       <div class="col-md-6">
@@ -28,7 +31,9 @@
           <label for="estado">Estado</label>
           <select name="estado" id="estado" class="form-control" formControlName="ESTADO">
             <option value="">Selecione um estado</option>
-            <option *ngFor="let sigla of siglas" [value]="sigla">{{ sigla }}</option>
+            <option *ngFor="let sigla of siglas" [value]="sigla">
+              {{ sigla }}
+            </option>
           </select>
           <!-- <input type="text" id="estado" formControlName="ESTADO" class="form-control"> -->
         </div>
@@ -38,19 +43,19 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="endereco">Endereço</label>
-          <input type="text" id="endereco" formControlName="ENDERECO" class="form-control">
+          <input type="text" id="endereco" formControlName="ENDERECO" class="form-control" />
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="bairro">Bairro</label>
-          <input type="text" id="bairro" formControlName="BAIRRO" class="form-control">
+          <input type="text" id="bairro" formControlName="BAIRRO" class="form-control" />
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="cidade">Cidade</label>
-          <input type="text" id="cidade" formControlName="CIDADE" class="form-control">
+          <input type="text" id="cidade" formControlName="CIDADE" class="form-control" />
         </div>
       </div>
     </div>
@@ -58,19 +63,19 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="rg">RG</label>
-          <input type="text" id="rg" formControlName="RG" class="form-control">
+          <input type="text" id="rg" formControlName="RG" class="form-control" />
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="cpf">CPF</label>
-          <input type="text" id="cpf" formControlName="CPF" class="form-control">
+          <input type="text" id="cpf" formControlName="CPF" class="form-control" />
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="dataNascto">Data de Nascimento</label>
-          <input type="date" id="dataNascto" formControlName="DATA_NASCTO" class="form-control">
+          <input type="date" id="dataNascto" formControlName="DATA_NASCTO" class="form-control" />
         </div>
       </div>
     </div>
@@ -78,19 +83,19 @@
       <div class="col-md-4">
         <div class="form-group">
           <label for="telefone">Telefone Pessoal</label>
-          <input type="text" id="telefone" formControlName="TELEFONE" class="form-control">
+          <input type="text" id="telefone" formControlName="TELEFONE" class="form-control" />
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="telComercial">Telefone Comercial</label>
-          <input type="text" id="telComercial" formControlName="TEL_COMERCIAL" class="form-control">
+          <input type="text" id="telComercial" formControlName="TEL_COMERCIAL" class="form-control" />
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="ramal">Ramal</label>
-          <input type="text" id="ramal" formControlName="RAMAL" class="form-control">
+          <input type="text" id="ramal" formControlName="RAMAL" class="form-control" />
         </div>
       </div>
     </div>
@@ -98,7 +103,7 @@
       <div class="col-md-12">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" formControlName="EMAIL" class="form-control">
+          <input type="email" id="email" formControlName="EMAIL" class="form-control" />
         </div>
       </div>
     </div>
@@ -108,37 +113,40 @@
           <label for="departamento">Departamento</label>
           <select formControlName="DEPARTAMENTO" class="form-control">
             <option value="">Selecione um Departamento</option>
-            <option *ngFor="let departamento of departamentos" [value]="departamento.DESCRICAO">{{ departamento.DESCRICAO }}</option>
+            <option *ngFor="let departamento of departamentos" [value]="departamento.ID">
+              {{ departamento.DESCRICAO }}
+            </option>
           </select>
         </div>
       </div>
+
       <div class="col-md-4">
         <div class="form-group">
           <label for="cargo">Cargo</label>
-          <select   class="form-control" formControlName="CARGO">
+          <select class="form-control" formControlName="CARGO">
             <option value="">Selecione um cargo</option>
-            <option *ngFor="let cargo of cargos" [value]="cargo.DESCRICAO">{{ cargo.DESCRICAO }}</option>
+            <option *ngFor="let cargo of cargos" [value]="cargo.ID">
+              {{ cargo.DESCRICAO }}
+            </option>
           </select>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="DATA_CADASTRO">Data de Contratação</label>
-          <input type="date" id="DATA_CADASTRO" formControlName="DATA_CADASTRO" class="form-control">
+          <input type="date" id="DATA_CADASTRO" formControlName="DATA_CADASTRO" class="form-control" />
         </div>
       </div>
-
-
     </div>
 
     <div class="row">
       <div class="col-md-4">
         <label for="">Data de retorno da última férias</label>
-        <input type="date" formControlName="ULTIMO_PERIODO_FERIAS" class="form-control">
+        <input type="date" formControlName="ULTIMO_PERIODO_FERIAS" class="form-control" />
       </div>
       <div class="col-md-4">
         <label for="">Saldo de férias</label>
-        <input type="text" formControlName="SALDO_FERIAS" class="form-control">
+        <input type="text" formControlName="SALDO_FERIAS" class="form-control" />
       </div>
     </div>
     <button type="submit" class="btn btn-success mt-4">Salvar</button>

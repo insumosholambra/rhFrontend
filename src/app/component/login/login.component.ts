@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginService } from './login.service';
+import { LoginService } from '../../core/services/login.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -58,13 +58,14 @@ export class LoginComponent implements OnInit {
   }
 
   setItems(response: any){
+    console.log(response);
+
     localStorage.setItem('token', response.access_token);
     localStorage.setItem('name', response.username);
     localStorage.setItem('subname', response.subname);
-    localStorage.setItem('cargo', response.cargo);
-    localStorage.setItem('departamento', response.departamento);
+    localStorage.setItem('cargo', response.cargo.DESCRICAO);
+    localStorage.setItem('departamento', response.departamento.DESCRICAO);
     localStorage.setItem('id', response.id);
-
 
   }
 }

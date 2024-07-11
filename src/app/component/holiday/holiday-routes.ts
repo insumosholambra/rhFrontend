@@ -15,7 +15,9 @@ export const holidayRoutes: Routes = [
       { path: '', component: HolidayComponent },
       { path: 'vacation-list', component: HolidayListComponent },
       { path: 'vacation-request', component: HolidayRequestComponent },
-      { path: 'new-vacation', component: NewVacationComponent }
+      { path: 'new-vacation', component: NewVacationComponent },
+      { path: 'my-vacations', component: NewVacationComponent }
+
     ]
   }
 ];

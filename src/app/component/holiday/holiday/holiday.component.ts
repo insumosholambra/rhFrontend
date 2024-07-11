@@ -40,4 +40,8 @@ export class HolidayComponent {
   request() {
     this.router.navigate(['/vacation/vacation-request']);
   }
+
+  myVacations(){
+    this.router.navigate(['/vacation/my-vacations']);
+  }
 }

@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { HolidayRequestService } from './holiday-request.service';
 import { HttpClientModule } from '@angular/common/http';
-import { EmployeeListService } from '../../lists/employee-list/employee-list.service';
+import { EmployeeListService } from '../../../core/services/employee-list.service';
 import { forkJoin, map } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class HolidayRequestComponent {
   vacations: any[] = [];
+  pendent: boolean = true
 
   constructor(
     private holidayService: HolidayRequestService,
@@ -25,6 +26,7 @@ export class HolidayRequestComponent {
 
   ngOnInit() {
     this.getAllRequests();
+    this.isPendent();
   }
 
   formatDate(dateString: any) {
@@ -61,11 +63,11 @@ export class HolidayRequestComponent {
           return this.employeeListService.userById(request.ID_FUNCIONARIO).pipe(
             map((employee) => ({
               ...request,
-              employeeName: employee
+              EMPLOYEE_NAME: employee
                 ? `${employee.NOME} ${employee.SOBRENOME}`
                 : 'Desconhecido',
-              dataAdmissao: employee ? employee.DATA_CADASTRO : null,
-              saldo: employee ? employee.SALDO_FERIAS : null,
+              DATA_ADMISSAO: employee ? employee.DATA_CADASTRO : null,
+              SALDO_FERIAS: employee ? employee.SALDO_FERIAS : null,
             }))
           );
         });
@@ -82,31 +84,88 @@ export class HolidayRequestComponent {
     });
   }
 
+  isPendent() {
+    this.holidayService.getRequests().subscribe((res) => {
+      const solicitacoes = res;
+      this.pendent = solicitacoes.some((solicitacao: { STATUS_SOLICITACAO: string; }) => solicitacao.STATUS_SOLICITACAO === 'PENDENTE');
+    });
+  }
+
+  alter(data: any) {
+    // Função alter ainda não implementada
+  }
+
+  calculateDaysDifference(startDate: string, endDate: string): number {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    // Calcula a diferença em milissegundos
+    const difference = Math.abs(end.getTime() - start.getTime());
+
+    // Calcula o número de dias dividindo pelos milissegundos em um dia
+    const daysDifference = Math.ceil(difference / (1000 * 3600 * 24));
+
+    return daysDifference;
+  }
+
   approve(data: any) {
     const newStatus = 'APROVADO';
-    console.log(data);
     const ID = data.ID_SOLICITACAO;
+    console.log(data);
 
+
+    // Chamada para aprovar a solicitação
     this.holidayService.approveRequest(ID, newStatus).subscribe(
       () => {
         Swal.fire({
           icon: 'success',
           title: 'Férias aprovadas',
-        }).then((res) => {
-          if (res.isConfirmed) {
-            window.location.reload();
+        }).then(() => {
+          // Após aprovado, atualiza o saldo de férias
+          const daysDifference = this.calculateDaysDifference(data.DATA_INICIO_FERIAS, data.DATA_FIM_FERIAS);
+          console.log(`Intervalo de dias escolhido: ${daysDifference} dias`);
+
+
+
+          if (daysDifference > 0) {
+            // Chame o serviço para atualizar o saldo
+            this.holidayService.updateBalanceVacation(ID, daysDifference).subscribe(
+              () => {
+                window.location.reload(); // Recarrega a página (ou atualiza os dados na tela)
+
+              },
+              (error: any) => {
+                console.error(`Erro ao atualizar saldo de férias para a solicitação ${ID}:`, error);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Erro ao atualizar saldo de férias',
+                  text: 'Por favor, tente novamente mais tarde.',
+                });
+              }
+            );
+          } else {
+            // Caso a diferença de dias seja zero ou negativa (erro de lógica de datas)
+            Swal.fire({
+              icon: 'warning',
+              title: 'Erro ao calcular dias de férias',
+              text: 'Verifique as datas de início e fim das férias.',
+            });
           }
         });
       },
       (error) => {
         console.error(`Erro ao aprovar solicitação de férias ${ID}:`, error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro ao aprovar solicitação de férias',
+          text: 'Por favor, tente novamente mais tarde.',
+        });
       }
     );
   }
 
   reject(data: any) {
     const newStatus = 'REPROVADO';
-    console.log(data);
     const ID = data.ID_SOLICITACAO;
 
     this.holidayService.approveRequest(ID, newStatus).subscribe(

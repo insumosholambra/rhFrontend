@@ -1,0 +1,29 @@
+<div class="row" style="width: 100%">
+  <div>
+    <h1>Dados Cadastrais</h1>
+  </div>
+  <div class="img-container">
+    <div class="img">
+      <img src="..\..\..\assets\person.svg" alt="" />
+    </div>
+  </div>
+  <div>
+    <h2>Gerenciamento Portal RH</h2>
+  </div>
+
+  <div class="group">
+    <div class="mat-cpf">
+      <span>115.62487</span>
+      <span>Matrícula</span>
+    </div>
+    <div class="mat-cpf">
+      <span>{{ this.cpf }}</span>
+      <span>CPF</span>
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="btn btn-outline-info">Informações Cadastrais</button>
+    <button class="btn btn-outline-info" (click)="goToReport()">Relatório de Visitas</button>
+    <button class="btn btn-outline-info" (click)="goToVisit()">Visitas</button>
+  </div>
+</div>

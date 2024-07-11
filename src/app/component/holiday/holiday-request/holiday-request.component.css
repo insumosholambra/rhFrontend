@@ -16,7 +16,7 @@ table {
 th, td {
   border: 1px solid rgb(133, 133, 133);
   padding: 8px;
-  text-align: center; /* Centraliza o conteúdo das células */
+  text-align: center;
 }
 
 .actions button {
@@ -29,25 +29,32 @@ th, td {
   color: white;
 }
 
+.alter{
+  background-color: #4CAF50;
+}
 
+.alter:hover{
+  background-color: #307932;
+
+}
 
 .actions .approve {
-  background-color: #4CAF50; /* Green background */
+  background-color: #4CAF50;
 }
 
 .actions .approve:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #45a049;
 }
 
 .actions .reject {
-  background-color: #f44336; /* Red background */
+  background-color: #f44336;
 }
 
 .actions .reject:hover {
-  background-color: #e53935; /* Darker red on hover */
+  background-color: #e53935;
 }
 
 .actions button:disabled {
-  background-color: #ccc; /* Grey background for disabled buttons */
-  cursor: not-allowed; /* Not-allowed cursor for disabled buttons */
+  background-color: #ccc;
+  cursor: not-allowed;
 }

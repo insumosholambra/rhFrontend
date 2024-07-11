@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Role } from '../../../model/role.model';
 import Swal from 'sweetalert2';
@@ -12,55 +18,45 @@ import { CommonModule } from '@angular/common';
   imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule],
   templateUrl: './role.component.html',
   styleUrl: './role.component.css',
-  providers: [RoleService]
-
+  providers: [RoleService],
 })
 export class RoleComponent {
-
-
   roleForm!: FormGroup;
-  role!: Role
+  role!: Role;
 
-
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private roleService: RoleService,
     private http: HttpClient
   ) {
     this.roleForm = this.fb.group({
       DESCRICAO: ['', Validators.required],
-    })}
+    });
+  }
 
-
-    ngOnInit(){
-      this.getRoles()
-    }
-
-
+  ngOnInit() {
+    this.getRoles();
+  }
 
   getRoles() {
     this.roleService.getAllRoles().subscribe(
-      response => {
+      (response) => {
         console.log(response);
       },
-      error => {
+      (error) => {
         console.error('Error parsing response:', error);
       }
     );
   }
 
-
-  onSubmit(){
-    if(this.roleForm.valid){
-      this.roleService.newRole(this.roleForm.value)
+  onSubmit() {
+    if (this.roleForm.valid) {
+      this.roleService.newRole(this.roleForm.value);
     } else {
       Swal.fire({
-        title: 'Erro, por favor, verifique se o campo foi preenchido corretamente.'
-      })
+        title:
+          'Erro, por favor, verifique se o campo foi preenchido corretamente.',
+      });
     }
-
   }
-
-
-
-
 }

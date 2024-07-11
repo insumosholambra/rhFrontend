@@ -34,3 +34,30 @@ button:hover .house-icon {
 .back{
   padding: 20px;
 }
+.navbar-nav .nav-item .dropdown-menu {
+  display: none;
+  position: absolute;
+  background-color: #bbbbbb;
+  border: none;
+}
+
+.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-item {
+  color: #000000;
+  padding: 20px 30px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #f18723;
+  color: #fff;
+
+}
+.active {
+  background-color: #e08530; /* Alterar a cor de fundo ou qualquer outra propriedade que deseje */
+  color: white; /* Alterar a cor do texto ou qualquer outra propriedade que deseje */
+}

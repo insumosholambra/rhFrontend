@@ -21,6 +21,7 @@
         <th>Departamento</th>
         <th>Cargo</th>
         <th>Saldo de Férias</th>
+        <th>Ação</th>
 
       </tr>
     </thead>
@@ -39,9 +40,10 @@
         <td>{{employee.TEL_COMERCIAL}}</td>
         <td>{{employee.RAMAL}}</td>
         <td>{{employee.EMAIL}}</td>
-        <td>{{employee.DEPARTAMENTO}}</td>
-        <td>{{employee.CARGO}}</td>
+        <td>{{employee.DEPARTAMENTO.DESCRICAO }}</td>
+        <td>{{employee.CARGO.DESCRICAO}}</td>
         <td>{{employee.SALDO_FERIAS}} dias</td>
+        <td><button class="btn btn-primary" (click)="edit(employee)">Editar</button><button class="btn btn-danger ml-8" (click)="delete(employee)">Excluir</button></td>
 
       </tr>
     </tbody>

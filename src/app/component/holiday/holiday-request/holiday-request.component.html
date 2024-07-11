@@ -19,18 +19,17 @@
     <tbody>
       <tr *ngFor="let vacation of vacations">
         <td>{{vacation.ID_FUNCIONARIO}}</td>
-        <td>{{vacation.employeeName}}</td>
-        <td>{{formatDate(vacation.dataAdmissao)}}</td>
-        <td>{{vacation.saldo}} dias</td>
+        <td>{{vacation.EMPLOYEE_NAME}}</td>
+        <td>{{formatDate(vacation.DATA_ADMISSAO)}}</td>
+        <td>{{vacation.SALDO_FERIAS}} dias</td>
         <td>{{formatDate(vacation.DATA_INICIO_FERIAS)}}</td>
         <td>{{formatDate(vacation.DATA_FIM_FERIAS)}}</td>
         <td>{{vacation.STATUS_SOLICITACAO}}</td>
         <td class="actions">
-          <button class="approve" style="margin-right: 2px;" title="Aprovar" (click)="approve(vacation)">A</button>
-          <button class="reject"  style="margin-left: 2px;"title="Reprovar" (click)="reject(vacation)">R</button>
+          <button class="alter" *ngIf="vacation.STATUS_SOLICITACAO !== 'PENDENTE'"  style="margin-right: 2px;" title="Alterar" (click)="alter(vacation)">Alterar</button>
+          <button class="approve" *ngIf="vacation.STATUS_SOLICITACAO === 'PENDENTE'"  style="margin-right: 2px;" title="Aprovar" (click)="approve(vacation)">A</button>
+          <button class="reject"  *ngIf="vacation.STATUS_SOLICITACAO === 'PENDENTE'" style="margin-left: 2px;"title="Reprovar" (click)="reject(vacation)">R</button>
         </td>
-
-
       </tr>
     </tbody>
   </table>

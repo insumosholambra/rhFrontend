@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeListService } from './employee-list.service';
+import { EmployeeListService } from '../../../core/services/employee-list.service';
 import { Employee } from '../../../model/employee.model';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { EditUserComponent } from '../../../modal/edit-user/edit-user.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-employee-list',
@@ -10,12 +13,17 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, HttpClientModule],
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css'],
-  providers: [EmployeeListService]
+  providers: [EmployeeListService, BsModalService],
 })
 export class EmployeeListComponent implements OnInit {
+  constructor(
+    private employeeListService: EmployeeListService,
+    private modalService: BsModalService
+  ) { }
 
-  constructor(private employeeListService: EmployeeListService){}
+  modalRef?: BsModalRef;
 
+  selectedEmployee!: Employee;
   employees: Employee[] = [];
   employee: Employee = {
     ID: 0,
@@ -33,28 +41,62 @@ export class EmployeeListComponent implements OnInit {
     TEL_COMERCIAL: '',
     RAMAL: '',
     EMAIL: '',
-    DEPARTAMENTO: '',
-    CARGO: '',
+    DEPARTAMENTO: {ID: 0, DESCRICAO: ''},
+    CARGO: {ID: 0, DESCRICAO: ''},
     SALDO_FERIAS: 0,
-    ULTIMO_PERIODO_FERIAS: 0,
-    DATA_CADASTRO: 0
-  }
-
+    ULTIMO_PERIODO_FERIAS: '0',
+    DATA_CADASTRO: '0',
+  };
 
   ngOnInit(): void {
     this.getAllUsers();
   }
 
   getAllUsers(): void {
-    this.employeeListService.allUsers().subscribe(response => {
+    this.employeeListService.allUsers().subscribe((response) => {
       this.employees = response;
-      if(this.employees.length > 0){
-        this.employee = this.employees[0]
+      if (this.employees.length > 0) {
+        console.log(this.employees);
+
+        this.employee = this.employees[0];
       }
     });
   }
 
+  edit(employee: Employee) {
+    this.selectedEmployee = employee;
 
+    const initialState = {
+      employee: this.selectedEmployee,
+    };
+    this.modalRef = this.modalService.show(EditUserComponent, { initialState });
+  }
 
+  delete(employee: Employee) {
+    Swal.fire({
+      title: 'Tem certeza que deseja excluir esse usuário?',
+      text: 'Você não poderá reverter isso!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, excluir!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.employeeListService.deleteEmployee(employee.ID).subscribe((response) => {
+            if (response) {
+              Swal.fire({
+                title: 'Usuário excluído com sucesso!',
+                icon: 'success',
+              }).then((res) => {
+                if (res.isConfirmed) {
+                  window.location.reload();
+                }
+              });
+            }
+          });
+      }
 
+    });
+  }
 }

@@ -33,4 +33,11 @@ export class HolidayRequestService {
 
     return this.http.patch(`${this.api}/vacation-requests/${id}/status`, body);
   }
+
+  updateBalanceVacation(id: number, days: number){
+
+    const body = { SALDO: days };
+
+    return this.http.patch(`${this.api}/vacation-balance/${id}`, body)
+  }
 }

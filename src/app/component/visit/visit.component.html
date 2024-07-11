@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Relatório de Visitas</title>
+</head>
+
+<body>
+  <form [formGroup]="visitForm" (ngSubmit)="submitForm()" method="post">
+    <div class="container">
+      <div class="title">
+        <img src="../assets/Logo_sem_texto.png" [width]="50" alt="" />
+        <h1>Relatório de Visita</h1>
+      </div>
+      <div class="first-block">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Nome</span>
+          <input type="text" class="form-control" formControlName="NOME" placeholder="Nome" aria-label="Nome" [value]="this.name" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Sobrenome</span>
+          <input type="text" class="form-control" formControlName="SOBRENOME" placeholder="Sobrenome" aria-label="Sobrenome" [value]="this.subname"/>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Data da Visita</span>
+          <input type="date" class="form-control" formControlName="DATA_VISITA" placeholder="" aria-label="Data da Visita" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Cliente Visitado</span>
+          <input type="text" class="form-control" formControlName="CLIENTE" placeholder="Cliente" aria-label="Cliente" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Propriedade</span>
+          <input type="text" class="form-control" formControlName="PROPRIEDADE" placeholder="Propriedade" aria-label="Propriedade" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Cidade</span>
+          <input type="text" class="form-control" formControlName="CIDADE" placeholder="Cidade" aria-label="Cidade" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Cultura</span>
+          <input type="text" class="form-control" formControlName="CULTURA" placeholder="Cultura" aria-label="Cultura" />
+        </div>
+      </div>
+      <div class="goal">
+        <div class="title-cards">
+          <h1>Objetivo da visita</h1>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Objetivo da visita</span>
+          <input type="text" class="form-control" formControlName="OBJETIVO" placeholder="Objetivo da visita" aria-label="Objetivo da visita" />
+        </div>
+      </div>
+      <div class="details">
+        <div class="title-cards">
+          <h1>Detalhe da Visita</h1>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Horário de Chegada</span>
+          <input type="time" class="form-control" formControlName="CHEGADA" placeholder="Horário de Chegada" aria-label="Horário de Chegada" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Horário de Saída</span>
+          <input type="time" class="form-control" formControlName="SAIDA" placeholder="Horário de Saída" aria-label="Horário de Saída" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Nome do Contato</span>
+          <input type="text" class="form-control" formControlName="CONTATO" placeholder="Nome do Contato" aria-label="Nome do Contato" />
+        </div>
+      </div>
+      <div class="motivo">
+        <div class="title-cards">
+          <h1>Motivo da Visita</h1>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Motivo da Visita</span>
+          <input type="text" class="form-control" formControlName="MOTIVO" placeholder="Motivo da Visita" aria-label="Motivo da Visita" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Observação e Recomendações</span>
+          <input type="text" class="form-control" formControlName="ASSUNTO" placeholder="Observação e Recomendações" aria-label="Observação e Recomendações" />
+        </div>
+      </div>
+      <div class="observable">
+        <div class="title-cards">
+          <h1>Observação e Recomendações</h1>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Problemas Identificados na Visita</span>
+          <input type="text" class="form-control" formControlName="PROBLEMAS" placeholder="Problemas Identificados na Visita" aria-label="Problemas Identificados na Visita" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Condições da Propriedade</span>
+          <input type="text" class="form-control" formControlName="CONDICOES_PROP" placeholder="Condições da Propriedade" aria-label="Condições da Propriedade" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Recomendações de Melhorias</span>
+          <input type="text" class="form-control" formControlName="MELHORIAS" placeholder="Recomendações de Melhorias" aria-label="Recomendações de Melhorias" />
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Necessidade de Visitas Futuras</span>
+          <div class="form-check form-check-inline" style="margin-left: 10px;">
+
+            <input class="form-check-input" type="radio" id="sim" formControlName="VISITA_FUTU" [value]="'true'" />
+            <label class="form-check-label" for="sim">Sim</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="nao" formControlName="VISITA_FUTU" [value]="'false'" />
+            <label class="form-check-label" for="nao">Não</label>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Se sim, informe uma previsão de data</span>
+          <input type="date" class="form-control" formControlName="NEW_DATE" placeholder="Previsão de Data" aria-label="Previsão de Data" />
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn-success">Salvar</button>
+      </div>
+      <div>Data de preenchimento desse formulário: {{this.formattedDateBrl}}</div>
+    </div>
+  </form>
+</body>
+
+</html>
