@@ -5,9 +5,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginService } from '../../core/services/login.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -49,8 +51,26 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         error => {
+          let errorMessage = 'Parece que nosso sistema está instável. Por favor, aguarde enquanto solucionamos o problema';
+
+          // Verifica se existe uma mensagem de erro personalizada do backend
+          if (error.error && error.error.message) {
+            if (error.error.message === 'User not found') {
+              errorMessage = 'Usuário não encontrado. Verifique seu ID e senha e tente novamente.';
+            } else {
+              errorMessage
+            }
+          }
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro',
+            text: errorMessage
+          });
           console.error('Login failed', error);
         }
+
+
       );
     } else {
       console.log('Formulário inválido');
