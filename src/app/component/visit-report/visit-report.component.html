@@ -1,0 +1,55 @@
+<div class="container">
+  <div>
+    <h1>Relatório de Visitas</h1>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Data da Visita</th>
+        <th>Cliente</th>
+        <th>Propriedade</th>
+        <th>Cidade</th>
+        <th>Cultura</th>
+        <th>Objetivo</th>
+        <th>Chegada</th>
+        <th>Saída</th>
+        <th>Contato</th>
+        <th>Motivo</th>
+        <th>Assunto</th>
+        <th>Condições da Propriedade</th>
+        <th>Problemas</th>
+        <th>Melhorias</th>
+        <th>Visita Futura</th>
+        <th>Nova Data</th>
+        <th>Data do Formulário</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let visit of visits">
+        <td>{{ visit.ID }}</td>
+        <td>{{ visit.NOME }}</td>
+        <td>{{ visit.SOBRENOME }}</td>
+        <td>{{ visit.DATA_VISITA | date: 'short' }}</td>
+        <td>{{ visit.CLIENTE }}</td>
+        <td>{{ visit.PROPRIEDADE }}</td>
+        <td>{{ visit.CIDADE }}</td>
+        <td>{{ visit.CULTURA }}</td>
+        <td>{{ visit.OBJETIVO }}</td>
+        <td>{{ visit.CHEGADA | date: 'short' }}</td>
+        <td>{{ visit.SAIDA | date: 'short' }}</td>
+        <td>{{ visit.CONTATO }}</td>
+        <td>{{ visit.MOTIVO }}</td>
+        <td>{{ visit.ASSUNTO }}</td>
+        <td>{{ visit.CONDICOES_PROP }}</td>
+        <td>{{ visit.PROBLEMAS }}</td>
+        <td>{{ visit.MELHORIAS }}</td>
+        <td>{{ visit.VISITA_FUTU }}</td>
+        <td>{{ visit.NEW_DATE | date: 'short' }}</td>
+        <td>{{ visit.DATA_FORM | date: 'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

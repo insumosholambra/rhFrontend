@@ -10,8 +10,9 @@
 <body>
   <div class="page">
     <form [formGroup]="form" class="formLogin" (ngSubmit)="login()">
+      <h1 class="mb-3">Intranet Insumos Holambra</h1>
       <p>Digite os seus dados de acesso no campo abaixo.</p>
-      <label for="email">Usuário</label>
+      <label for="email">ID</label>
       <input type="number" placeholder="Digite seu ID de acesso" autofocus="true" formControlName="ID" />
       <label for="password">Senha</label>
       <input type="password" placeholder="Digite sua senha" formControlName="PASSWORD" />
