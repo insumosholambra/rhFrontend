@@ -78,8 +78,6 @@ export class LoginComponent implements OnInit {
   }
 
   setItems(response: any){
-    console.log(response);
-
     localStorage.setItem('token', response.access_token);
     localStorage.setItem('name', response.username);
     localStorage.setItem('subname', response.subname);

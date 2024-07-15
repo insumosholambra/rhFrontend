@@ -33,7 +33,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.updateRoute();
     this.getName();
 
-    // Subscribe to router events
     this.routerSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.updateRoute();
@@ -63,15 +62,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.employeeService.userById(Number(id)).subscribe(res => {
       this.name = `${res.NOME} ${res.SOBRENOME}`
       this.cargo = res.CARGO.DESCRICAO
-      console.log(this.cargo);
 
     })
-    // const nome = localStorage.getItem('name') || '';
-    // const subname = localStorage.getItem('subname') || '';
-    // const cargo = localStorage.getItem('cargo') || '';
 
-    // this.name = `${nome} ${subname}`;
-    // this.cargo = cargo;
   }
 
   home() {

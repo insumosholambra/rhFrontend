@@ -10,20 +10,25 @@ import Swal from 'sweetalert2';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit(){
+    this.canActivate()
+  }
+
   canActivate(): boolean {
     if (this.authService.isLoggedIn()) {
       return true;
-    } else if (this.authService.isTokenExpired()) {
+    }
+
+    if (this.authService.isTokenExpired()) {
       Swal.fire({
         icon: 'info',
         title: 'Sua sessão expirou',
         text: 'Por favor, faça o login novamente',
       });
-      this.router.navigate(['/login']);
-      return false;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
     }
+
+    this.router.navigate(['/login']);
+    return false;
   }
+
 }

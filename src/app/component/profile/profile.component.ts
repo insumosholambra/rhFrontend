@@ -30,7 +30,6 @@ export class ProfileComponent {
     return this.userService.getUserData(Number(id)).subscribe(res => {
       this.user = res
       this.cpf = this.user.CPF
-      console.log(res)
     });
   }
 
