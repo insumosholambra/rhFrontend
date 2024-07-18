@@ -24,12 +24,14 @@ export class ProfileComponent {
 
   user!: Employee
   cpf: string = ''
+  name: string = ''
 
   getUserData(){
     const id = localStorage.getItem('id')
     return this.userService.getUserData(Number(id)).subscribe(res => {
       this.user = res
       this.cpf = this.user.CPF
+      this.name = this.user.NOME + this.user.SOBRENOME
     });
   }
 

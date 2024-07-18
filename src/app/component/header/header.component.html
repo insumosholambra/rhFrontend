@@ -12,17 +12,17 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home'}" (click)="home()">Home</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/register'}" (click)="register()">Cadastro de funcionários</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/employee-list'}" (click)="list()">Lista de Funcionários</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/role-register'}" (click)="registerRole()">Cadastro de cargos</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/department-register'}" (click)="registerDepartments()">Cadastro de departamentos</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/department-list'}" (click)="listDepartments()">Lista de departamentos</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/role-list'}" (click)="listRoles()">Lista de Cargos</a></li>
+            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente'" [ngClass]="{'active': rota === '/home/register'}" (click)="register()">Cadastro de funcionários</a></li>
+            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente'" [ngClass]="{'active': rota === '/home/employee-list'}" (click)="list()">Lista de Funcionários</a></li>
+            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente'" [ngClass]="{'active': rota === '/home/role-register'}" (click)="registerRole()">Cadastro de cargos</a></li>
+            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente'" [ngClass]="{'active': rota === '/home/department-register'}" (click)="registerDepartments()">Cadastro de departamentos</a></li>
+            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente'" [ngClass]="{'active': rota === '/home/department-list'}" (click)="listDepartments()">Lista de departamentos</a></li>
+            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente'" [ngClass]="{'active': rota === '/home/role-list'}" (click)="listRoles()">Lista de Cargos</a></li>
             <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/visit'}" (click)="visit()">Relatório de Visita</a></li>
             <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/my-profile'}" (click)="myProfile()">Meus dados</a></li>
             <li><a class="dropdown-item" [ngClass]="{'active': rota === '/vacation'}" (click)="vacations()">Férias</a></li>
             <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/docs-list'}" (click)="readDocs()">Documentos e Arquivos</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/docs-register'}" (click)="sendDocs()">Envio de arquivos</a></li>
+            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente'" [ngClass]="{'active': rota === '/home/docs-register'}" (click)="sendDocs()">Envio de arquivos</a></li>
 
           </ul>
         </li>

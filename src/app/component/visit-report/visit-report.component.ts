@@ -1,32 +1,119 @@
-import { Component } from '@angular/core';
-import { Visit } from '../../model/visit.model';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { VisitService } from '../../core/services/visit.service';
+import { UserService } from '../../core/services/user.service';
+import { AuthService } from '../login/auth.service';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
+const module = [
+  CommonModule,
+  HttpClientModule,
+  FormsModule,
+  MatFormFieldModule,
+  MatSelectModule,
+  MatInputModule,
+];
 
 @Component({
   selector: 'app-visit-report',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './visit-report.component.html',
-  styleUrl: './visit-report.component.css',
-  providers: [VisitService]
+  styleUrls: ['./visit-report.component.css'],
+  standalone: true,
+  imports: [...module],
+  providers: [VisitService, UserService],
 })
-export class VisitReportComponent {
+export class VisitReportComponent implements OnInit {
+  visits: any[] = [];
+  filteredVisits: any[] = [];
+  names: any[] = [];
+  selectedName: string = '';
+  nomeCompleto: string = '';
+  userInfo: any;
+  userType: string = '';
 
   constructor(
-    private visitService: VisitService
-  ){}
-  visits: Visit[] = [];
+    private visitService: VisitService,
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit(){
-    this.getVisits()
+  ngOnInit(): void {
+    this.getUserInfo();
+    this.getUser();
   }
 
+  verifyUserType() {
+    if (this.userInfo && this.userInfo.CARGO === 'Gerente') {
+      this.userType = 'Gerente';
+    }
+  }
 
-  getVisits(){
-    this.visitService.getAllVisits().subscribe((res: any) => {
-      console.log(res);
-      this.visits = res;
-    })
+  getUserInfo() {
+    this.userInfo = this.authService.getUserInfo(); // Obter informações do token
+
+    if (this.userInfo) {
+      this.verifyUserType();
+      this.getVisits(); // Chamar getVisits após obter informações do usuário
+    } else {
+      console.error('Erro ao obter informações do usuário');
+    }
+  }
+
+  getUser() {
+    this.userService.getUserNames().subscribe(
+      (res: any) => {
+        this.names = [];
+        console.log(res);
+
+        for (const employee of res) {
+          if (employee.departamento === 'Vendas') {
+            this.names.push({ nome: employee.nome });
+          }
+        }
+      },
+      (error) => {
+        console.error('Erro ao buscar nomes de usuários:', error);
+      }
+    );
+  }
+
+  getVisits() {
+    const id = this.userInfo?.id || 0;
+
+    if (this.userInfo.cargo == 'Gerente') {
+      this.visitService.getAllVisits().subscribe(
+        (res) => {
+          this.visits = Array.isArray(res) ? res : [res];
+          this.filteredVisits = this.visits;
+        },
+        (error) => {
+          console.error('Erro ao buscar todas as visitas:', error);
+        }
+      );
+    } else {
+      this.visitService.getVisitsByUser(Number(id)).subscribe(
+        (res) => {
+          this.visits = Array.isArray(res) ? res : [res];
+          this.filteredVisits = this.visits;
+        },
+        (error) => {
+          console.error('Erro ao buscar visitas do usuário:', error);
+        }
+      );
+    }
+  }
+
+  filterVisitsByName() {
+    if (this.selectedName) {
+      this.filteredVisits = this.visits.filter(
+        (visit) => visit.nome === this.selectedName
+      );
+    } else {
+      this.filteredVisits = this.visits;
+    }
   }
 }

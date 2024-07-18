@@ -1,13 +1,25 @@
 <div class="container">
-  <div>
+  <div class="dropdown">
     <h1>Relatório de Visitas</h1>
+
+    <mat-form-field>
+      <mat-label>Selecione um engenheiro</mat-label>
+      <mat-select [(ngModel)]="selectedName" name="name">
+        <mat-option >
+          Selecione um engenheiro
+        </mat-option>
+        <mat-option *ngFor="let name of names" [value]="name.nome">
+          {{ name.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </div>
   <table>
     <thead>
       <tr>
-        <th>ID</th>
+        <!-- <th>ID</th> -->
         <th>Nome</th>
-        <th>Sobrenome</th>
         <th>Data da Visita</th>
         <th>Cliente</th>
         <th>Propriedade</th>
@@ -29,26 +41,33 @@
     </thead>
     <tbody>
       <tr *ngFor="let visit of visits">
-        <td>{{ visit.ID }}</td>
-        <td>{{ visit.NOME }}</td>
-        <td>{{ visit.SOBRENOME }}</td>
-        <td>{{ visit.DATA_VISITA | date: 'short' }}</td>
-        <td>{{ visit.CLIENTE }}</td>
-        <td>{{ visit.PROPRIEDADE }}</td>
-        <td>{{ visit.CIDADE }}</td>
-        <td>{{ visit.CULTURA }}</td>
-        <td>{{ visit.OBJETIVO }}</td>
-        <td>{{ visit.CHEGADA | date: 'short' }}</td>
-        <td>{{ visit.SAIDA | date: 'short' }}</td>
-        <td>{{ visit.CONTATO }}</td>
-        <td>{{ visit.MOTIVO }}</td>
-        <td>{{ visit.ASSUNTO }}</td>
-        <td>{{ visit.CONDICOES_PROP }}</td>
-        <td>{{ visit.PROBLEMAS }}</td>
-        <td>{{ visit.MELHORIAS }}</td>
-        <td>{{ visit.VISITA_FUTU }}</td>
-        <td>{{ visit.NEW_DATE | date: 'short' }}</td>
-        <td>{{ visit.DATA_FORM | date: 'short' }}</td>
+        <!-- <td data-label="ID">{{ visit.ID }}</td> -->
+        <td data-label="Nome">{{ visit.NOME }} {{ visit.SOBRENOME }}</td>
+        <td data-label="Data da Visita">
+          {{ visit.DATA_VISITA | date : "dd/MM/yyyy" }}
+        </td>
+        <td data-label="Cliente">{{ visit.CLIENTE }}</td>
+        <td data-label="Propriedade">{{ visit.PROPRIEDADE }}</td>
+        <td data-label="Cidade">{{ visit.CIDADE }}</td>
+        <td data-label="Cultura">{{ visit.CULTURA }}</td>
+        <td data-label="Objetivo">{{ visit.OBJETIVO }}</td>
+        <td data-label="Chegada">{{ visit.CHEGADA | date : "shortTime" }}</td>
+        <td data-label="Saída">{{ visit.SAIDA | date : "shortTime" }}</td>
+        <td data-label="Contato">{{ visit.CONTATO }}</td>
+        <td data-label="Motivo">{{ visit.MOTIVO }}</td>
+        <td data-label="Assunto">{{ visit.ASSUNTO }}</td>
+        <td data-label="Condições da Propriedade">
+          {{ visit.CONDICOES_PROP }}
+        </td>
+        <td data-label="Problemas">{{ visit.PROBLEMAS }}</td>
+        <td data-label="Melhorias">{{ visit.MELHORIAS }}</td>
+        <td data-label="Visita Futura">{{ visit.VISITA_FUTU }}</td>
+        <td data-label="Nova Data">
+          {{ visit.NEW_DATE | date : "dd/MM/yyyy" }}
+        </td>
+        <td data-label="Data do Formulário">
+          {{ visit.DATA_FORM | date : "dd/MM/yyyy" }}
+        </td>
       </tr>
     </tbody>
   </table>

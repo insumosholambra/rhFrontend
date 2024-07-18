@@ -11,6 +11,7 @@ import { Employee } from '../../model/employee.model';
 })
 export class UserService {
 
+
   constructor(
     private http: HttpClient
   ) { }
@@ -31,6 +32,10 @@ export class UserService {
 
   getStates(): Observable<any>{
     return this.http.get<any>('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+  }
+
+  getUserNames() {
+    return this.http.get<Employee>(`${this.api}/users`);
   }
 
 }

@@ -7,17 +7,25 @@ import { environment } from '../../environment/environment';
   providedIn: 'root'
 })
 export class AuthService {
+
   private token: string | null = null;
 
 
 
   constructor(){
     this.token = localStorage.getItem('token'); // Carregar o token do localStorage
+    this.getUserInfo()
   }
 
   setToken(token: string) {
     this.token = token;
   }
+
+  getUserInfo(): any {
+    console.log(this.token);
+
+  }
+
 
   getToken(): string | null {
     return this.token;

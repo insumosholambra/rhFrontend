@@ -26,4 +26,8 @@ export class VisitService {
   getAllVisits(): Observable<Visit>{
     return this.http.get<any>(`${this.api}/visit`)
   }
+
+  getVisitsByUser(id: number): Observable<Visit>{
+    return this.http.get<any>(`${this.api}/visit/${id}`)
+  }
 }
