@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from '../../environment/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { environment } from '../../environment/environment';
 export class AuthService {
 
   private token: string | null = null;
+  private helper = new JwtHelperService();
 
 
 
@@ -21,14 +23,35 @@ export class AuthService {
     this.token = token;
   }
 
-  getUserInfo(): any {
-    console.log(this.token);
+  getToken(): string | null {
+    return this.token
+  }
 
+  // Função para decodificar o token
+  decodeToken() {
+    if (this.token) {
+      try {
+        const decodedToken = this.helper.decodeToken(this.token);
+        return {
+          name: decodedToken.username,
+          subname: decodedToken.subname,
+          cargo: decodedToken.cargo.DESCRICAO,
+          id: decodedToken.id,
+          departamento: decodedToken.departamento.DESCRICAO
+        };
+      } catch (error) {
+        console.error('Erro ao decodificar token:', error);
+        return null;
+      }
+    }
+    return null;
   }
 
 
-  getToken(): string | null {
-    return this.token;
+  // Função para obter informações do usuário
+  getUserInfo(): any {
+    const decodedToken = this.decodeToken();
+    return decodedToken; // Retorna o payload decodificado do token
   }
 
   isTokenExpired(): boolean {
@@ -50,3 +73,7 @@ export class AuthService {
     localStorage.removeItem('token'); // Remover o token do localStorage
   }
 }
+function jwtDecode(token: string): any {
+  throw new Error('Function not implemented.');
+}
+
