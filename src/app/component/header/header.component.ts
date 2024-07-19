@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.employeeService.userById(Number(id)).subscribe(res => {
       this.name = `${res.NOME} ${res.SOBRENOME}`
-      this.cargo = res.CARGO.DESCRICAO
+      this.cargo = res.CARGO?.DESCRICAO
 
     })
 

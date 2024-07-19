@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { Visit } from '../../model/visit.model';
 
 const module = [
   CommonModule,
@@ -27,7 +28,7 @@ const module = [
   providers: [VisitService, UserService],
 })
 export class VisitReportComponent implements OnInit {
-  visits: any[] = [];
+  visits: Visit[] = [];
   filteredVisits: any[] = [];
   names: any[] = [];
   selectedName: string = '';
@@ -70,8 +71,8 @@ export class VisitReportComponent implements OnInit {
         console.log(res);
 
         for (const employee of res) {
-          if (employee.departamento === 'Vendas') {
-            this.names.push({ nome: employee.nome });
+          if (employee.DEPARTAMENTO && employee.DEPARTAMENTO.DESCRICAO === 'Vendas') {
+            this.names.push({ nome: employee.NOME + employee.SOBRENOME });
           }
         }
       },
@@ -81,6 +82,7 @@ export class VisitReportComponent implements OnInit {
     );
   }
 
+
   getVisits() {
     const id = this.userInfo?.id || 0;
 
@@ -89,6 +91,7 @@ export class VisitReportComponent implements OnInit {
         (res) => {
           this.visits = Array.isArray(res) ? res : [res];
           this.filteredVisits = this.visits;
+          console.log(this.visits);
         },
         (error) => {
           console.error('Erro ao buscar todas as visitas:', error);
@@ -110,7 +113,7 @@ export class VisitReportComponent implements OnInit {
   filterVisitsByName() {
     if (this.selectedName) {
       this.filteredVisits = this.visits.filter(
-        (visit) => visit.nome === this.selectedName
+        (visit) => visit.NOME + visit.SOBRENOME === this.selectedName
       );
     } else {
       this.filteredVisits = this.visits;

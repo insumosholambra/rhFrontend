@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EditUserComponent } from '../../../modal/edit-user/edit-user.component';
 import Swal from 'sweetalert2';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, SharedModule],
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css'],
   providers: [EmployeeListService, BsModalService],
@@ -22,6 +23,11 @@ export class EmployeeListComponent implements OnInit {
   ) { }
 
   modalRef?: BsModalRef;
+  DESCRICAO_DEP: string = ''
+  DESCRICAO_CARGO: string = ''
+  uniqueDepartments: Set<string> = new Set();
+  uniquePositions: Set<string> = new Set();
+
 
   selectedEmployee!: Employee;
   employees: Employee[] = [];
@@ -53,12 +59,12 @@ export class EmployeeListComponent implements OnInit {
   }
 
   getAllUsers(): void {
-    this.employeeListService.allUsers().subscribe((response) => {
-      this.employees = response;
-      if (this.employees.length > 0) {
-        console.log(this.employees);
-
-        this.employee = this.employees[0];
+    this.employeeListService.allUsers().subscribe({
+      next: (response: Employee[]) => {
+        this.employees = response;
+      },
+      error: (error: any) => {
+        console.error('Erro ao buscar usuários:', error);
       }
     });
   }
@@ -92,6 +98,8 @@ export class EmployeeListComponent implements OnInit {
                 if (res.isConfirmed) {
                   window.location.reload();
                 }
+                window.location.reload();
+
               });
             }
           });

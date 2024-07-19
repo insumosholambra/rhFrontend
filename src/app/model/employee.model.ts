@@ -18,8 +18,8 @@ export interface Employee {
   DATA_CADASTRO: string;
   RAMAL: string;
   EMAIL: string | null;
-  DEPARTAMENTO: Department;
-  CARGO: Role;
-  ULTIMO_PERIODO_FERIAS: string | null;
+  DEPARTAMENTO: Department | null;
+  CARGO: Role | null;
+   ULTIMO_PERIODO_FERIAS: string | null;
   SALDO_FERIAS: number | null;
 }

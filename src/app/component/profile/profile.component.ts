@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
 import { Employee } from '../../model/employee.model';
+import { CpfFormatPipe } from '../../shared/cpf-format';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [],
+  imports: [ SharedModule ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })

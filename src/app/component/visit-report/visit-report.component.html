@@ -1,24 +1,21 @@
 <div class="container">
-  <div class="dropdown">
-    <h1>Relatório de Visitas</h1>
+  <h1>Relatório de Visitas</h1>
 
-    <mat-form-field>
-      <mat-label>Selecione um engenheiro</mat-label>
-      <mat-select [(ngModel)]="selectedName" name="name">
-        <mat-option >
-          Selecione um engenheiro
-        </mat-option>
-        <mat-option *ngFor="let name of names" [value]="name.nome">
-          {{ name.nome }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Selecione um engenheiro</mat-label>
+    <mat-select [(ngModel)]="selectedName" name="name" (selectionChange)="filterVisitsByName()">
+      <mat-option value="">
+        Selecione um engenheiro
+      </mat-option>
+      <mat-option *ngFor="let name of names" [value]="name.nome">
+        {{ name.nome }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  </div>
   <table>
     <thead>
       <tr>
-        <!-- <th>ID</th> -->
         <th>Nome</th>
         <th>Data da Visita</th>
         <th>Cliente</th>
@@ -40,8 +37,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let visit of visits">
-        <!-- <td data-label="ID">{{ visit.ID }}</td> -->
+      <tr *ngFor="let visit of filteredVisits">
         <td data-label="Nome">{{ visit.NOME }} {{ visit.SOBRENOME }}</td>
         <td data-label="Data da Visita">
           {{ visit.DATA_VISITA | date : "dd/MM/yyyy" }}
@@ -61,7 +57,7 @@
         </td>
         <td data-label="Problemas">{{ visit.PROBLEMAS }}</td>
         <td data-label="Melhorias">{{ visit.MELHORIAS }}</td>
-        <td data-label="Visita Futura">{{ visit.VISITA_FUTU }}</td>
+        <td data-label="Visita Futura">{{ visit.VISITA_FUTU === 'true' ? 'Sim' : 'Não' }}</td>
         <td data-label="Nova Data">
           {{ visit.NEW_DATE | date : "dd/MM/yyyy" }}
         </td>

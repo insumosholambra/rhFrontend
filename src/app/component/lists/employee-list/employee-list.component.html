@@ -6,7 +6,6 @@
     <thead>
       <tr>
         <th>Nome</th>
-        <th>Sobrenome</th>
         <th>CPF</th>
         <th>RG</th>
         <th>Nascimento</th>
@@ -27,21 +26,20 @@
     </thead>
     <tbody>
       <tr *ngFor="let employee of employees">
-        <td>{{employee.NOME}}</td>
-        <td>{{employee.SOBRENOME}}</td>
+        <td>{{employee.NOME}} {{employee.SOBRENOME}}</td>
         <td>{{employee.CPF}}</td>
         <td>{{employee.RG}}</td>
-        <td>{{employee.DATA_NASCTO}}</td>
+        <td>{{employee.DATA_NASCTO | date : "dd/MM/yyyy" }}</td>
         <td>{{employee.ENDERECO}}</td>
         <td>{{employee.BAIRRO}}</td>
         <td>{{employee.CIDADE}}</td>
         <td>{{employee.ESTADO}}</td>
-        <td>{{employee.TELEFONE}}</td>
-        <td>{{employee.TEL_COMERCIAL}}</td>
+        <td>{{employee.TELEFONE | phoneNumber }}</td>
+        <td>{{employee.TEL_COMERCIAL | comercialNumber  }}</td>
         <td>{{employee.RAMAL}}</td>
         <td>{{employee.EMAIL}}</td>
-        <td>{{employee.DEPARTAMENTO.DESCRICAO }}</td>
-        <td>{{employee.CARGO.DESCRICAO}}</td>
+        <td>{{ employee.DEPARTAMENTO?.DESCRICAO || 'N/A' }}</td>
+        <td>{{ employee.CARGO?.DESCRICAO || 'N/A' }}</td>
         <td>{{employee.SALDO_FERIAS}} dias</td>
         <td><button class="btn btn-primary" (click)="edit(employee)">Editar</button><button class="btn btn-danger ml-8" (click)="delete(employee)">Excluir</button></td>
 

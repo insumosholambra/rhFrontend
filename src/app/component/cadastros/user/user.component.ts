@@ -6,14 +6,16 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../core/services/user.service';
 import { Department } from '../../../model/department.model';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, NgxMaskDirective, NgxMaskPipe],
   styleUrls: ['./user.component.css'],
-  providers: [UserService, ListRoleService]
+  providers: [UserService, ListRoleService, provideNgxMask(),
+  ]
 })
 export class UserComponent {
 
@@ -46,7 +48,8 @@ export class UserComponent {
       CARGO: [0, Validators.required],
       DATA_CADASTRO: ['', Validators.required],
       ULTIMO_PERIODO_FERIAS: ['', Validators.required],
-      SALDO_FERIAS: ['', Validators.required]
+      SALDO_FERIAS: ['', Validators.required],
+      MATRICULA: ['', Validators.required]
     });
   }
 
