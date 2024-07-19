@@ -1,11 +1,23 @@
-<div class="container">
+<div class="container-lg">
   <h1>Relatório de Visitas</h1>
 
-  <mat-form-field>
-    <mat-label>Selecione um engenheiro</mat-label>
+  <mat-form-field *ngIf="this.userInfo.cargo === 'Gerente'">
+    <mat-label>Selecione um vendedor</mat-label>
     <mat-select [(ngModel)]="selectedName" name="name" (selectionChange)="filterVisitsByName()">
       <mat-option value="">
-        Selecione um engenheiro
+        Selecione um vendedor
+      </mat-option>
+      <mat-option *ngFor="let name of names" [value]="name.nome">
+        {{ name.nome }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="ml-3">
+    <mat-label>Selecione um Cliente</mat-label>
+    <mat-select [(ngModel)]="selectedName" name="name" (selectionChange)="filterVisitsByName()">
+      <mat-option value="">
+        Selecione um cliente
       </mat-option>
       <mat-option *ngFor="let name of names" [value]="name.nome">
         {{ name.nome }}

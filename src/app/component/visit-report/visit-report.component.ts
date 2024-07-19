@@ -32,9 +32,12 @@ export class VisitReportComponent implements OnInit {
   filteredVisits: any[] = [];
   names: any[] = [];
   selectedName: string = '';
+  selectedCliente: string = '';
+
   nomeCompleto: string = '';
   userInfo: any;
   userType: string = '';
+  nameClients: string = ''
 
   constructor(
     private visitService: VisitService,
@@ -114,6 +117,16 @@ export class VisitReportComponent implements OnInit {
     if (this.selectedName) {
       this.filteredVisits = this.visits.filter(
         (visit) => visit.NOME + visit.SOBRENOME === this.selectedName
+      );
+    } else {
+      this.filteredVisits = this.visits;
+    }
+  }
+
+  filterVisistByCliente(){
+    if (this.selectedCliente) {
+      this.filteredVisits = this.visits.filter(
+        (visit) => visit.CLIENTE === this.selectedCliente
       );
     } else {
       this.filteredVisits = this.visits;

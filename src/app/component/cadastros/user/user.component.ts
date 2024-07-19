@@ -14,8 +14,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
   standalone: true,
   imports: [ReactiveFormsModule, FormsModule, CommonModule, NgxMaskDirective, NgxMaskPipe],
   styleUrls: ['./user.component.css'],
-  providers: [UserService, ListRoleService, provideNgxMask(),
-  ]
+  providers: [UserService, ListRoleService, provideNgxMask()]
 })
 export class UserComponent {
 
@@ -31,25 +30,25 @@ export class UserComponent {
     private roleService: ListRoleService
   ) {
     this.employeeForm = this.fb.group({
-      NOME: ['', Validators.required],
-      SOBRENOME: ['', Validators.required],
-      CPF: ['', Validators.required],
-      RG: ['', Validators.required],
-      DATA_NASCTO: ['', Validators.required],
-      ENDERECO: ['', Validators.required],
-      BAIRRO: ['', Validators.required],
-      CIDADE: ['', Validators.required],
-      ESTADO: ['', Validators.required],
-      TELEFONE: ['', Validators.required],
+      NOME: ['', ],
+      SOBRENOME: ['', ],
+      CPF: ['', ],
+      RG: ['', ],
+      DATA_NASCTO: ['', ],
+      ENDERECO: ['', ],
+      BAIRRO: ['', ],
+      CIDADE: ['', ],
+      ESTADO: ['', ],
+      TELEFONE: ['', ],
       TEL_COMERCIAL: [''],
       RAMAL: [''],
-      EMAIL: ['', [Validators.required, Validators.email]],
-      DEPARTAMENTO: [0, Validators.required],
-      CARGO: [0, Validators.required],
-      DATA_CADASTRO: ['', Validators.required],
-      ULTIMO_PERIODO_FERIAS: ['', Validators.required],
-      SALDO_FERIAS: ['', Validators.required],
-      MATRICULA: ['', Validators.required]
+      EMAIL: ['',],
+      DEPARTAMENTO: [0, ],
+      CARGO: [0, ],
+      DATA_CADASTRO: ['', ],
+      ULTIMO_PERIODO_FERIAS: ['', ],
+      SALDO_FERIAS: ['', ],
+      MATRICULA: ['', ]
     });
   }
 
@@ -66,8 +65,16 @@ export class UserComponent {
       const departmentId = this.employeeForm.get('DEPARTAMENTO')?.value;
       const cargoId = this.employeeForm.get('CARGO')?.value;
 
+      // Função para definir uma data padrão se estiver vazia
+      const getValidDate = (date: any) => {
+        return date ? date : '1900-01-01';
+      };
+
       const employeeData: Employee = {
         ...this.employeeForm.value,
+        DATA_NASCTO: getValidDate(this.employeeForm.get('DATA_NASCTO')?.value),
+        DATA_CADASTRO: getValidDate(this.employeeForm.get('DATA_CADASTRO')?.value),
+        ULTIMO_PERIODO_FERIAS: getValidDate(this.employeeForm.get('ULTIMO_PERIODO_FERIAS')?.value),
         DEPARTAMENTO: {
           ID: departmentId,
           DESCRICAO: this.departamentos.find(dep => dep.ID === departmentId)?.DESCRICAO || ''
@@ -124,6 +131,7 @@ export class UserComponent {
       });
     }
   }
+
 
   getRoles() {
     this.roleService.getAllRoles().subscribe(
