@@ -42,3 +42,7 @@ input[type="email"]:focus {
 input::placeholder {
   color: #aaa;
 }
+
+.ml-3{
+  margin-left: 10px;
+}

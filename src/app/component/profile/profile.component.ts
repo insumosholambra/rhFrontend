@@ -27,13 +27,17 @@ export class ProfileComponent {
   user!: Employee
   cpf: string = ''
   name: string = ''
+  matricula: number = 0;
 
   getUserData(){
     const id = localStorage.getItem('id')
     return this.userService.getUserData(Number(id)).subscribe(res => {
+      console.log(res);
+
       this.user = res
       this.cpf = this.user.CPF
-      this.name = this.user.NOME + this.user.SOBRENOME
+      this.name = this.user.NOME + this.user.SOBRENOME;
+      this.matricula = this.user.MATRICULA
     });
   }
 

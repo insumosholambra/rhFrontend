@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { DepartmentService } from '../../component/cadastros/department/department.service';
 import { Department } from '../../model/department.model';
+import { ListRoleService } from '../../component/lists/role-list/list-role.service';
+import { Role } from '../../model/role.model';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,19 +16,21 @@ import { Department } from '../../model/department.model';
   imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css'],
-  providers: [EmployeeListService, DepartmentService]
+  providers: [EmployeeListService, DepartmentService, ListRoleService]
 })
 export class EditUserComponent implements OnInit {
   @Input() employee!: Employee;
   form!: FormGroup;
   departments: Department[] = [];
+  roles: Role[] = []
   positions: string[] = [];
   isModalOpen: boolean = true;
 
   constructor(
     private fb: FormBuilder,
     private employeeService: EmployeeListService,
-    private departmentService: DepartmentService
+    private departmentService: DepartmentService,
+    private roleService: ListRoleService
   ) {}
 
   ngOnInit() {
@@ -39,7 +43,7 @@ export class EditUserComponent implements OnInit {
       TEL_COMERCIAL: [this.employee.TEL_COMERCIAL, Validators.required],
       EMAIL: [this.employee.EMAIL, Validators.required],
       DEPARTAMENTO_ID: [this.employee.DEPARTAMENTO?.ID || '', Validators.required],
-      CARGO: [this.employee.CARGO, Validators.required],
+      CARGO_ID: [this.employee.CARGO?.ID || '', Validators.required],
     });
     this.loadDepartments();
     this.loadPositions();
@@ -57,8 +61,14 @@ export class EditUserComponent implements OnInit {
   }
 
   loadPositions() {
-    // Example of loading positions, adjust as needed
-    this.positions = ['Cargo X', 'Cargo Y', 'Cargo Z'];
+    this.roleService.getAllRoles().subscribe(res => {
+      this.roles = res
+    })
+  }
+
+  getPositionById(roleId: number){
+    const position = this.roles.find(role => role.ID === this.employee.CARGO?.ID)
+    return position ? position.DESCRICAO : '';
   }
 
   updateUser() {
@@ -76,6 +86,8 @@ export class EditUserComponent implements OnInit {
         if (this.form.valid) {
           const departmentId = this.form.value.DEPARTAMENTO_ID;
           const departmentDescription = this.getDepartmentNameById(departmentId);
+          const roleId = this.form.value.ROLE_ID
+          const roleDescription = this.getPositionById(roleId)
 
           const updatedUser: Employee = {
             ...this.employee,
@@ -83,6 +95,10 @@ export class EditUserComponent implements OnInit {
             DEPARTAMENTO: {
               ID: departmentId,
               DESCRICAO: departmentDescription
+            },
+            CARGO: {
+              ID: roleId,
+              DESCRICAO: roleDescription
             }
           };
 

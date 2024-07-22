@@ -7,11 +7,30 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { EditUserComponent } from '../../../modal/edit-user/edit-user.component';
 import Swal from 'sweetalert2';
 import { SharedModule } from '../../../shared/shared.module';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { RouterModule } from '@angular/router';
 
+const modules = [
+  MatTableModule,
+  MatButtonModule,
+  MatIconModule,
+  MatPaginatorModule,
+  MatSortModule,
+  CommonModule,
+  HttpClientModule,
+  SharedModule,
+  RouterModule
+];
 @Component({
   selector: 'app-employee-list',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, SharedModule],
+  imports: [modules],
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css'],
   providers: [EmployeeListService, BsModalService],
@@ -20,14 +39,13 @@ export class EmployeeListComponent implements OnInit {
   constructor(
     private employeeListService: EmployeeListService,
     private modalService: BsModalService
-  ) { }
+  ) {}
 
   modalRef?: BsModalRef;
-  DESCRICAO_DEP: string = ''
-  DESCRICAO_CARGO: string = ''
+  DESCRICAO_DEP: string = '';
+  DESCRICAO_CARGO: string = '';
   uniqueDepartments: Set<string> = new Set();
   uniquePositions: Set<string> = new Set();
-
 
   selectedEmployee!: Employee;
   employees: Employee[] = [];
@@ -47,12 +65,16 @@ export class EmployeeListComponent implements OnInit {
     TEL_COMERCIAL: '',
     RAMAL: '',
     EMAIL: '',
-    DEPARTAMENTO: {ID: 0, DESCRICAO: ''},
-    CARGO: {ID: 0, DESCRICAO: ''},
+    DEPARTAMENTO: { ID: 0, DESCRICAO: '' },
+    CARGO: { ID: 0, DESCRICAO: '' },
     SALDO_FERIAS: 0,
     ULTIMO_PERIODO_FERIAS: '0',
     DATA_CADASTRO: '0',
+    MATRICULA: 0
   };
+
+  displayedColumns: string[] = ['nome', 'cpf', 'rg', 'nascimento', 'endereco', 'bairro', 'cidade', 'estado', 'telefone', 'telComercial', 'ramal', 'email', 'departamento', 'cargo', 'saldoFerias', 'acao'];
+
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -65,7 +87,7 @@ export class EmployeeListComponent implements OnInit {
       },
       error: (error: any) => {
         console.error('Erro ao buscar usuários:', error);
-      }
+      },
     });
   }
 
@@ -89,22 +111,26 @@ export class EmployeeListComponent implements OnInit {
       confirmButtonText: 'Sim, excluir!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.employeeListService.deleteEmployee(employee.ID).subscribe((response) => {
-            if (response) {
-              Swal.fire({
-                title: 'Usuário excluído com sucesso!',
-                icon: 'success',
-              }).then((res) => {
-                if (res.isConfirmed) {
-                  window.location.reload();
-                }
-                window.location.reload();
-
-              });
-            }
-          });
+        this.employeeListService.deleteEmployee(employee.ID).subscribe({
+          next: (response) => {
+            Swal.fire({
+              title: 'Usuário excluído com sucesso!',
+              icon: 'success',
+            }).then(() => {
+              this.employees = this.employees.filter(emp => emp.ID !== employee.ID);
+            });
+          },
+          error: (error) => {
+            console.error('Erro ao excluir usuário:', error);
+            Swal.fire({
+              title: 'Erro ao excluir usuário!',
+              text: 'Ocorreu um erro ao tentar excluir o usuário. Por favor, tente novamente.',
+              icon: 'error',
+            });
+          }
+        });
       }
-
     });
   }
+
 }

@@ -34,10 +34,13 @@ export class VisitReportComponent implements OnInit {
   selectedName: string = '';
   selectedCliente: string = '';
 
+  name: string = ''
+
   nomeCompleto: string = '';
   userInfo: any;
   userType: string = '';
   nameClients: string = ''
+  cargo: string = ''
 
   constructor(
     private visitService: VisitService,
@@ -48,6 +51,8 @@ export class VisitReportComponent implements OnInit {
   ngOnInit(): void {
     this.getUserInfo();
     this.getUser();
+
+    this.cargo = localStorage.getItem('cargo') || ''
   }
 
   verifyUserType() {
@@ -71,7 +76,6 @@ export class VisitReportComponent implements OnInit {
     this.userService.getUserNames().subscribe(
       (res: any) => {
         this.names = [];
-        console.log(res);
 
         for (const employee of res) {
           if (employee.DEPARTAMENTO && employee.DEPARTAMENTO.DESCRICAO === 'Vendas') {
@@ -87,24 +91,24 @@ export class VisitReportComponent implements OnInit {
 
 
   getVisits() {
-    const id = this.userInfo?.id || 0;
+    const id = localStorage.getItem('id');
 
-    if (this.userInfo.cargo == 'Gerente') {
+    if (this.userInfo.cargo === 'Gerente' || this.userInfo.cargo === 'Diretor Executivo') {
       this.visitService.getAllVisits().subscribe(
         (res) => {
           this.visits = Array.isArray(res) ? res : [res];
-          this.filteredVisits = this.visits;
-          console.log(this.visits);
+          this.filteredVisits = this.visits.length ? this.visits : [];
         },
         (error) => {
           console.error('Erro ao buscar todas as visitas:', error);
         }
       );
     } else {
+      console.log('Entrou no else');
       this.visitService.getVisitsByUser(Number(id)).subscribe(
         (res) => {
           this.visits = Array.isArray(res) ? res : [res];
-          this.filteredVisits = this.visits;
+          this.filteredVisits = this.visits.length ? this.visits : [];
         },
         (error) => {
           console.error('Erro ao buscar visitas do usuário:', error);
@@ -112,6 +116,7 @@ export class VisitReportComponent implements OnInit {
       );
     }
   }
+
 
   filterVisitsByName() {
     if (this.selectedName) {

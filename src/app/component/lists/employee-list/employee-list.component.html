@@ -1,49 +1,97 @@
 <div class="table-container">
-  <div>
+  <div style="display: flex; flex-direction: row; justify-content: space-between;">
     <h1>Lista de Funcionários</h1>
+    <button class="btn btn-primary" [routerLink]="['/home/register']" routerLinkActive="router-link-active" >Adicionar Funcionário</button>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>CPF</th>
-        <th>RG</th>
-        <th>Nascimento</th>
-        <th>Endereço</th>
-        <th>Bairro</th>
-        <th>Cidade</th>
-        <th>Estado</th>
-        <th>Telefone</th>
-        <th>Tel Comercial</th>
-        <th>Ramal</th>
-        <th>Email</th>
-        <th>Departamento</th>
-        <th>Cargo</th>
-        <th>Saldo de Férias</th>
-        <th>Ação</th>
+  <table mat-table [dataSource]="employees" class="mat-elevation-z8">
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> Nome </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.NOME}} {{employee.SOBRENOME}} </td>
+    </ng-container>
 
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let employee of employees">
-        <td>{{employee.NOME}} {{employee.SOBRENOME}}</td>
-        <td>{{employee.CPF}}</td>
-        <td>{{employee.RG}}</td>
-        <td>{{employee.DATA_NASCTO | date : "dd/MM/yyyy" }}</td>
-        <td>{{employee.ENDERECO}}</td>
-        <td>{{employee.BAIRRO}}</td>
-        <td>{{employee.CIDADE}}</td>
-        <td>{{employee.ESTADO}}</td>
-        <td>{{employee.TELEFONE | phoneNumber }}</td>
-        <td>{{employee.TEL_COMERCIAL | comercialNumber  }}</td>
-        <td>{{employee.RAMAL}}</td>
-        <td>{{employee.EMAIL}}</td>
-        <td>{{ employee.DEPARTAMENTO?.DESCRICAO || 'N/A' }}</td>
-        <td>{{ employee.CARGO?.DESCRICAO || 'N/A' }}</td>
-        <td>{{employee.SALDO_FERIAS}} dias</td>
-        <td><button class="btn btn-primary" (click)="edit(employee)">Editar</button><button class="btn btn-danger ml-8" (click)="delete(employee)">Excluir</button></td>
+    <ng-container matColumnDef="cpf">
+      <th mat-header-cell *matHeaderCellDef> CPF </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.CPF | cpfFormat}} </td>
+    </ng-container>
 
-      </tr>
-    </tbody>
+    <ng-container matColumnDef="rg">
+      <th mat-header-cell *matHeaderCellDef> RG </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.RG}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nascimento">
+      <th mat-header-cell *matHeaderCellDef> Nascimento </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.DATA_NASCTO | date : "dd/MM/yyyy" }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="endereco">
+      <th mat-header-cell *matHeaderCellDef> Endereço </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.ENDERECO}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bairro">
+      <th mat-header-cell *matHeaderCellDef> Bairro </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.BAIRRO}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cidade">
+      <th mat-header-cell *matHeaderCellDef> Cidade </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.CIDADE}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.ESTADO}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefone">
+      <th mat-header-cell *matHeaderCellDef> Telefone </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.TELEFONE | phoneNumber }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="telComercial">
+      <th mat-header-cell *matHeaderCellDef> Tel Comercial </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.TEL_COMERCIAL | comercialNumber }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ramal">
+      <th mat-header-cell *matHeaderCellDef> Ramal </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.RAMAL}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.EMAIL}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="departamento">
+      <th mat-header-cell *matHeaderCellDef> Departamento </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.DEPARTAMENTO?.DESCRICAO || 'N/A'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cargo">
+      <th mat-header-cell *matHeaderCellDef> Cargo </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.CARGO?.DESCRICAO || 'N/A'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="saldoFerias">
+      <th mat-header-cell *matHeaderCellDef> Saldo de Férias </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.SALDO_FERIAS}} dias </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acao">
+      <th mat-header-cell *matHeaderCellDef> Ação </th>
+      <td mat-cell *matCellDef="let employee">
+        <button mat-icon-button color="primary" (click)="edit(employee)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="delete(employee)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>

@@ -1,82 +1,134 @@
-<div class="container-lg">
+<!-- <div class="container-lg">
   <h1>Relatório de Visitas</h1>
 
-  <mat-form-field *ngIf="this.userInfo.cargo === 'Gerente'">
-    <mat-label>Selecione um vendedor</mat-label>
-    <mat-select [(ngModel)]="selectedName" name="name" (selectionChange)="filterVisitsByName()">
-      <mat-option value="">
-        Selecione um vendedor
-      </mat-option>
-      <mat-option *ngFor="let name of names" [value]="name.nome">
-        {{ name.nome }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <div *ngIf="filteredVisits && filteredVisits.length > 0; else noData">
+    <mat-form-field
+      *ngIf="
+        this.userInfo.cargo === 'Gerente' ||
+        this.userInfo.cargo === 'Diretor Executivo'
+      "
+    >
+      <mat-label>Selecione um vendedor</mat-label>
+      <mat-select
+        [(ngModel)]="selectedName"
+        name="name"
+        (selectionChange)="filterVisitsByName()"
+      >
+        <mat-option value=""> Selecione um vendedor </mat-option>
+        <mat-option *ngFor="let name of names" [value]="name.nome">
+          {{ name.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field class="ml-3">
-    <mat-label>Selecione um Cliente</mat-label>
-    <mat-select [(ngModel)]="selectedName" name="name" (selectionChange)="filterVisitsByName()">
-      <mat-option value="">
-        Selecione um cliente
-      </mat-option>
-      <mat-option *ngFor="let name of names" [value]="name.nome">
-        {{ name.nome }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field class="ml-3">
+      <mat-label>Selecione um Cliente</mat-label>
+      <mat-select
+        [(ngModel)]="selectedName"
+        name="name"
+        (selectionChange)="filterVisitsByName()"
+      >
+        <mat-option value=""> Selecione um cliente </mat-option>
+        <mat-option *ngFor="let name of names" [value]="name.nome">
+          {{ name.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Data da Visita</th>
-        <th>Cliente</th>
-        <th>Propriedade</th>
-        <th>Cidade</th>
-        <th>Cultura</th>
-        <th>Objetivo</th>
-        <th>Chegada</th>
-        <th>Saída</th>
-        <th>Contato</th>
-        <th>Motivo</th>
-        <th>Assunto</th>
-        <th>Condições da Propriedade</th>
-        <th>Problemas</th>
-        <th>Melhorias</th>
-        <th>Visita Futura</th>
-        <th>Nova Data</th>
-        <th>Data do Formulário</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let visit of filteredVisits">
-        <td data-label="Nome">{{ visit.NOME }} {{ visit.SOBRENOME }}</td>
-        <td data-label="Data da Visita">
-          {{ visit.DATA_VISITA | date : "dd/MM/yyyy" }}
-        </td>
-        <td data-label="Cliente">{{ visit.CLIENTE }}</td>
-        <td data-label="Propriedade">{{ visit.PROPRIEDADE }}</td>
-        <td data-label="Cidade">{{ visit.CIDADE }}</td>
-        <td data-label="Cultura">{{ visit.CULTURA }}</td>
-        <td data-label="Objetivo">{{ visit.OBJETIVO }}</td>
-        <td data-label="Chegada">{{ visit.CHEGADA | date : "shortTime" }}</td>
-        <td data-label="Saída">{{ visit.SAIDA | date : "shortTime" }}</td>
-        <td data-label="Contato">{{ visit.CONTATO }}</td>
-        <td data-label="Motivo">{{ visit.MOTIVO }}</td>
-        <td data-label="Assunto">{{ visit.ASSUNTO }}</td>
-        <td data-label="Condições da Propriedade">
-          {{ visit.CONDICOES_PROP }}
-        </td>
-        <td data-label="Problemas">{{ visit.PROBLEMAS }}</td>
-        <td data-label="Melhorias">{{ visit.MELHORIAS }}</td>
-        <td data-label="Visita Futura">{{ visit.VISITA_FUTU === 'true' ? 'Sim' : 'Não' }}</td>
-        <td data-label="Nova Data">
-          {{ visit.NEW_DATE | date : "dd/MM/yyyy" }}
-        </td>
-        <td data-label="Data do Formulário">
-          {{ visit.DATA_FORM | date : "dd/MM/yyyy" }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Data da Visita</th>
+          <th>Cliente</th>
+          <th>Detalhes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let visit of filteredVisits">
+          <td data-label="Nome">{{ visit.NOME }} {{ visit.SOBRENOME }}</td>
+          <td data-label="Data da Visita">
+            {{ visit.DATA_VISITA | date : "dd/MM/yyyy" }}
+          </td>
+          <td data-label="Cliente">{{ visit.CLIENTE }}</td>
+          <td><button>Detalhes</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->    <!-- <mat-form-field class="ml-3">
+      <mat-label>Selecione um Cliente</mat-label>
+      <mat-select
+        [(ngModel)]="selectedName"
+        name="name"
+        (selectionChange)="filterVisitsByName()"
+      >
+        <mat-option value=""> Selecione um cliente </mat-option>
+        <mat-option *ngFor="let name of names" [value]="name.nome">
+          {{ name.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> -->
+    <div class="screen">
+      <h1>Relatório de Visitas</h1>
+      <div *ngIf="filteredVisits && filteredVisits.length > 0; else noData">
+        <mat-form-field *ngIf="this.cargo == 'Gerente'">
+          <mat-label>Selecione um vendedor</mat-label>
+          <mat-select [(ngModel)]="selectedName" name="name" (selectionChange)="filterVisitsByName()">
+            <mat-option value="">Selecione um vendedor</mat-option>
+            <mat-option *ngFor="let name of names" [value]="name.nome">{{ name.nome }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <table class="responsive-table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Data da Visita</th>
+              <th>Cliente</th>
+              <th>Propriedade</th>
+              <th>Cidade</th>
+              <th>Cultura</th>
+              <th>Objetivo</th>
+              <th>Chegada</th>
+              <th>Saída</th>
+              <th>Contato</th>
+              <th>Motivo</th>
+              <th>Assunto</th>
+              <th>Condições da Propriedade</th>
+              <th>Problemas</th>
+              <th>Melhorias</th>
+              <th>Visita Futura</th>
+              <th>Nova Data</th>
+              <th>Data do Formulário</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let visit of filteredVisits">
+              <td data-label="Nome">{{ visit.NOME }} {{ visit.SOBRENOME }}</td>
+              <td data-label="Data da Visita">{{ visit.DATA_VISITA | date: 'dd/MM/yyyy' }}</td>
+              <td data-label="Cliente">{{ visit.CLIENTE }}</td>
+              <td data-label="Propriedade">{{ visit.PROPRIEDADE }}</td>
+              <td data-label="Cidade">{{ visit.CIDADE }}</td>
+              <td data-label="Cultura">{{ visit.CULTURA }}</td>
+              <td data-label="Objetivo">{{ visit.OBJETIVO }}</td>
+              <td data-label="Chegada">{{ visit.CHEGADA | date: 'shortTime' }}</td>
+              <td data-label="Saída">{{ visit.SAIDA | date: 'shortTime' }}</td>
+              <td data-label="Contato">{{ visit.CONTATO }}</td>
+              <td data-label="Motivo">{{ visit.MOTIVO }}</td>
+              <td data-label="Assunto">{{ visit.ASSUNTO }}</td>
+              <td data-label="Condições da Propriedade">{{ visit.CONDICOES_PROP }}</td>
+              <td data-label="Problemas">{{ visit.PROBLEMAS }}</td>
+              <td data-label="Melhorias">{{ visit.MELHORIAS }}</td>
+              <td data-label="Visita Futura">{{ visit.VISITA_FUTU === 'true' ? 'Sim' : 'Não' }}</td>
+              <td data-label="Nova Data">{{ visit.NEW_DATE | date: 'dd/MM/yyyy' }}</td>
+              <td data-label="Data do Formulário">{{ visit.DATA_FORM | date: 'dd/MM/yyyy' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <ng-template #noData>
+        <div class="no-data-message">Não há visitas</div>
+      </ng-template>
+    </div>

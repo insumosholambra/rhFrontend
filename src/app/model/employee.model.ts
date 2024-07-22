@@ -20,6 +20,7 @@ export interface Employee {
   EMAIL: string | null;
   DEPARTAMENTO: Department | null;
   CARGO: Role | null;
-   ULTIMO_PERIODO_FERIAS: string | null;
+  ULTIMO_PERIODO_FERIAS: string | null;
   SALDO_FERIAS: number | null;
+  MATRICULA: number;
 }

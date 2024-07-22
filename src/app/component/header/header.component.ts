@@ -62,7 +62,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.employeeService.userById(Number(id)).subscribe(res => {
       this.name = `${res.NOME} ${res.SOBRENOME}`
       this.cargo = res.CARGO?.DESCRICAO
-
     })
 
   }
@@ -112,11 +111,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   exit() {
-    this.router.navigate(['/login']);
     localStorage.clear();
+    this.router.navigate(['/login']);
+
   }
 
   visit() {
     this.router.navigate(['/home/visit']);
+  }
+
+  visitReport() {
+    this.router.navigate(['/home/visit-report']);
   }
 }

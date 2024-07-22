@@ -59,7 +59,6 @@ export class UserComponent {
   }
 
   onSubmit(): void {
-    console.log(this.employeeForm.value);
 
     if (this.employeeForm.valid) {
       const departmentId = this.employeeForm.get('DEPARTAMENTO')?.value;
@@ -85,7 +84,6 @@ export class UserComponent {
         }
       };
 
-      console.log(employeeData);
 
       this.userService.newEmployee(employeeData).subscribe({
         next: (response) => {

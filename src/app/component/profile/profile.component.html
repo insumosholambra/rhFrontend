@@ -13,7 +13,7 @@
 
   <div class="group">
     <div class="mat-cpf">
-      <span>115.62487</span>
+      <span>{{this.matricula || 'Não disponível'}}</span>
       <span>Matrícula</span>
     </div>
     <div class="mat-cpf">
@@ -22,9 +22,8 @@
     </div>
   </div>
   <div class="buttons">
-    <button class="btn btn-outline-info">Informações Cadastrais</button>
+    <!-- <button class="btn btn-outline-info">Informações Cadastrais</button> -->
     <button class="btn btn-outline-info" (click)="goToVisit()">Cadastrar Visitas</button>
     <button class="btn btn-outline-info" (click)="goToReport()">Relatório de Visitas</button>
-
   </div>
 </div>
