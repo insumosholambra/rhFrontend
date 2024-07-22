@@ -34,9 +34,6 @@ import Swal from 'sweetalert2';
     this.name = localStorage.getItem(String('name')) || '';
     this.subname = localStorage.getItem(String('subname')) || '';
 
-
-    console.log(id);
-
     this.currentDate = new Date();
     const formattedDate = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
     this.formattedDateBrl = this.datePipe.transform(this.currentDate, 'dd/MM/yyyy');
@@ -52,8 +49,8 @@ import Swal from 'sweetalert2';
       CIDADE: [''],
       CULTURA: [''],
       OBJETIVO: [''],
-      CHEGADA: [''],
-      SAIDA: [''],
+      CHEGADA: ['', Validators.required],
+      SAIDA: ['', Validators.required],
       MOTIVO: [''],
       ASSUNTO: [''],
       PROBLEMAS: [''],
@@ -64,6 +61,19 @@ import Swal from 'sweetalert2';
       ID: [id],
       DATA_FORM: [formattedDate]
     });
+
+    window.addEventListener('keydown', this.preventEnterKey, true);
+
+  }
+
+  preventEnterKey(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  }
+
+  ngOnDestroy(): void {
+    window.removeEventListener('keydown', this.preventEnterKey, true);
   }
 
   formatTime(time: string): string {
@@ -76,39 +86,51 @@ import Swal from 'sweetalert2';
       return time = '00:00:00'
     }
   }
-
   submitForm() {
     const formData = this.visitForm.value;
 
     formData.CHEGADA = this.formatTime(formData.CHEGADA);
     formData.SAIDA = this.formatTime(formData.SAIDA);
 
-
     if (this.visitForm.valid) {
-      this.visitService.newVisit(formData).subscribe(res => {
-        if (res) {
-          this.visitForm.reset();
-          Swal.fire(
-            'Sucesso',
-            'Visita cadastrada com sucesso',
-            'success',
-          ).then(res => {
-            if (res.isConfirmed) {
-            window.location.reload()
-            }
-          })
-
+      this.visitService.newVisit(formData).subscribe(
+        res => {
+          if (res) {
+            Swal.fire({
+              title: 'Sucesso',
+              text: 'Visita cadastrada com sucesso',
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            }).then(result => {
+              if (result.isConfirmed) {
+                this.visitForm.reset();
+                window.location.reload();
+              }
+            });
+          }
+        },
+        err => {
+          console.error('Erro ao cadastrar visita:', err);
         }
-      }, err => {
-        console.error('Erro ao cadastrar visita:', err);
-      });
+      );
     } else {
-      Swal.fire(
-        'Erro',
-        'Preencha todos os campos corretamente',
-        'error',
-      )
+      if (!this.visitForm.controls['CHEGADA'].valid || !this.visitForm.controls['SAIDA'].valid) {
+        Swal.fire({
+          title: 'Erro',
+          text: 'Os campos Chegada e Saída são obrigatórios',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+      } else {
+        Swal.fire({
+          title: 'Erro',
+          text: 'Preencha todos os campos corretamente',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+      }
       console.error('Formulário inválido');
     }
   }
+
 }

@@ -19,9 +19,9 @@
             <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'" [ngClass]="{'active': rota === '/home/department-register'}" (click)="registerDepartments()">Cadastro de departamentos</a></li>
             <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'" [ngClass]="{'active': rota === '/home/department-list'}" (click)="listDepartments()">Lista de departamentos</a></li>
             <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/visit'}" (click)="visit()">Cadastrar Visita</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/visit-report'}" (click)="visit()">Relatório de Visitas</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/my-profile'}" (click)="myProfile()">Meus dados</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/vacation'}" (click)="vacations()">Férias</a></li>
+            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/visit-report'}" (click)="visitReport()">Relatório de Visitas</a></li>
+            <!-- <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/my-profile'}" (click)="myProfile()">Meus dados</a></li> -->
+            <!-- <li><a class="dropdown-item" [ngClass]="{'active': rota === '/vacation'}" (click)="vacations()">Férias</a></li> -->
             <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/docs-list'}" (click)="readDocs()">Documentos e Arquivos</a></li>
             <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'" [ngClass]="{'active': rota === '/home/docs-register'}" (click)="sendDocs()">Envio de arquivos</a></li>
 

@@ -30,4 +30,8 @@ export class VisitService {
   getVisitsByUser(id: number): Observable<Visit>{
     return this.http.get<any>(`${this.api}/visit/${id}`)
   }
+
+  getVisitsById(id: number): Observable<Visit>{
+    return this.http.get<any>(`${this.api}/visit/all-visits/${id}`)
+  }
 }

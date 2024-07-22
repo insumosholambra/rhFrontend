@@ -51,6 +51,7 @@ export class VisitReportComponent implements OnInit {
   ngOnInit(): void {
     this.getUserInfo();
     this.getUser();
+    this.getVisits()
 
     this.cargo = localStorage.getItem('cargo') || ''
   }
@@ -92,8 +93,12 @@ export class VisitReportComponent implements OnInit {
 
   getVisits() {
     const id = localStorage.getItem('id');
+    const cargo = localStorage.getItem('cargo')
+    console.log('chamou');
 
-    if (this.userInfo.cargo === 'Gerente' || this.userInfo.cargo === 'Diretor Executivo') {
+    if (cargo === 'Gerente' || cargo === 'Diretor Executivo') {
+      console.log('entrou no if');
+
       this.visitService.getAllVisits().subscribe(
         (res) => {
           this.visits = Array.isArray(res) ? res : [res];
@@ -105,8 +110,10 @@ export class VisitReportComponent implements OnInit {
       );
     } else {
       console.log('Entrou no else');
-      this.visitService.getVisitsByUser(Number(id)).subscribe(
+      this.visitService.getVisitsById(Number(id)).subscribe(
         (res) => {
+          console.log(res);
+
           this.visits = Array.isArray(res) ? res : [res];
           this.filteredVisits = this.visits.length ? this.visits : [];
         },
