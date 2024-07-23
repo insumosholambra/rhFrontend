@@ -23,7 +23,7 @@ export class VisitService {
     return this.http.post<any>(`${this.api}/visit`, visit)
   }
 
-  getAllVisits(): Observable<Visit>{
+  getAllVisits(): Observable<Visit[]>{
     return this.http.get<any>(`${this.api}/visit`)
   }
 
@@ -31,7 +31,7 @@ export class VisitService {
     return this.http.get<any>(`${this.api}/visit/${id}`)
   }
 
-  getVisitsById(id: number): Observable<Visit>{
+  getVisitsById(id: number): Observable<Visit[]>{
     return this.http.get<any>(`${this.api}/visit/all-visits/${id}`)
   }
 }

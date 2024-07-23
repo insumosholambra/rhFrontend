@@ -4,8 +4,7 @@
 }
 
 .screen{
-  max-width: 1400px;
-  margin-left: 50px;
+  margin-left: 20px;
 }
 
 table {
@@ -16,7 +15,7 @@ table {
 th, td {
   padding: 8px 12px;
   text-align: left;
-  border: 1px solid #ddd;
+  border: 1px solid #c4c4c4;
 }
 
 thead {

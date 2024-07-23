@@ -29,18 +29,19 @@ const module = [
 })
 export class VisitReportComponent implements OnInit {
   visits: Visit[] = [];
-  filteredVisits: any[] = [];
+  filteredVisits: Visit[] = [];
   names: any[] = [];
+  clients: string[] = [];
   selectedName: string = '';
   selectedCliente: string = '';
 
-  name: string = ''
+  name: string = '';
 
   nomeCompleto: string = '';
   userInfo: any;
   userType: string = '';
-  nameClients: string = ''
-  cargo: string = ''
+  nameClients: string = '';
+  cargo: string = '';
 
   constructor(
     private visitService: VisitService,
@@ -51,9 +52,9 @@ export class VisitReportComponent implements OnInit {
   ngOnInit(): void {
     this.getUserInfo();
     this.getUser();
-    this.getVisits()
+    this.getVisits();
 
-    this.cargo = localStorage.getItem('cargo') || ''
+    this.cargo = localStorage.getItem('cargo') || '';
   }
 
   verifyUserType() {
@@ -63,11 +64,11 @@ export class VisitReportComponent implements OnInit {
   }
 
   getUserInfo() {
-    this.userInfo = this.authService.getUserInfo(); // Obter informações do token
+    this.userInfo = this.authService.getUserInfo();
 
     if (this.userInfo) {
       this.verifyUserType();
-      this.getVisits(); // Chamar getVisits após obter informações do usuário
+      this.getVisits();
     } else {
       console.error('Erro ao obter informações do usuário');
     }
@@ -79,7 +80,10 @@ export class VisitReportComponent implements OnInit {
         this.names = [];
 
         for (const employee of res) {
-          if (employee.DEPARTAMENTO && employee.DEPARTAMENTO.DESCRICAO === 'Vendas') {
+          if (
+            employee.DEPARTAMENTO &&
+            employee.DEPARTAMENTO.DESCRICAO === 'Vendas'
+          ) {
             this.names.push({ nome: employee.NOME + employee.SOBRENOME });
           }
         }
@@ -90,17 +94,31 @@ export class VisitReportComponent implements OnInit {
     );
   }
 
-
   getVisits() {
     const id = localStorage.getItem('id');
-    const cargo = localStorage.getItem('cargo')
-    console.log('chamou');
+    const cargo = localStorage.getItem('cargo');
 
     if (cargo === 'Gerente' || cargo === 'Diretor Executivo') {
-      console.log('entrou no if');
 
       this.visitService.getAllVisits().subscribe(
-        (res) => {
+        (res: Visit[]) => {
+          this.clients = [];
+          this.names = [];
+
+          const tecSet = new Set<string>();
+
+          res.forEach((cliente) => {
+            if (cliente.CLIENTE) {
+              this.clients.push(cliente.CLIENTE);
+            }
+            if (cliente.NOME && cliente.SOBRENOME) {
+              tecSet.add(cliente.NOME + ' ' + cliente.SOBRENOME);
+            }
+          });
+
+          this.names = Array.from(tecSet);
+
+
           this.visits = Array.isArray(res) ? res : [res];
           this.filteredVisits = this.visits.length ? this.visits : [];
         },
@@ -109,10 +127,24 @@ export class VisitReportComponent implements OnInit {
         }
       );
     } else {
-      console.log('Entrou no else');
+
       this.visitService.getVisitsById(Number(id)).subscribe(
-        (res) => {
-          console.log(res);
+        (res: Visit[]) => {
+          this.clients = [];
+          this.names = [];
+
+          const tecSet = new Set<string>();
+
+          res.forEach((cliente) => {
+            if (cliente.CLIENTE) {
+              this.clients.push(cliente.CLIENTE);
+            }
+            if (cliente.NOME && cliente.SOBRENOME) {
+              tecSet.add(cliente.NOME + ' ' + cliente.SOBRENOME);
+            }
+          });
+
+          this.names = Array.from(tecSet);
 
           this.visits = Array.isArray(res) ? res : [res];
           this.filteredVisits = this.visits.length ? this.visits : [];
@@ -125,17 +157,24 @@ export class VisitReportComponent implements OnInit {
   }
 
 
+
   filterVisitsByName() {
+
     if (this.selectedName) {
-      this.filteredVisits = this.visits.filter(
-        (visit) => visit.NOME + visit.SOBRENOME === this.selectedName
-      );
+      console.log(this.selectedName);
+
+      this.filteredVisits = this.visits.filter((visit) => {
+        const selectedNameNormalized = this.selectedName.trim().toLowerCase();
+
+        const visitNameNormalized = (visit.NOME + ' ' + visit.SOBRENOME).trim().toLowerCase();
+        return visitNameNormalized === selectedNameNormalized;
+      });
     } else {
       this.filteredVisits = this.visits;
     }
   }
 
-  filterVisistByCliente(){
+  filterVisistByCliente() {
     if (this.selectedCliente) {
       this.filteredVisits = this.visits.filter(
         (visit) => visit.CLIENTE === this.selectedCliente
@@ -143,5 +182,13 @@ export class VisitReportComponent implements OnInit {
     } else {
       this.filteredVisits = this.visits;
     }
+  }
+
+  clearFilter() {
+    this.filteredVisits = this.visits;
+  }
+
+  showDetails() {
+    throw new Error('Method not implemented.');
   }
 }
