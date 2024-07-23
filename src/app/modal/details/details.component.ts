@@ -19,6 +19,18 @@ export class DetailsComponent {
   ngOnInit() {
     console.log(this.visit);
   }
+
+  isDefaultDate(date: Date | string | undefined): boolean {
+    console.log(this.visit);
+    if (!date) return false;
+    const defaultDate = '1970-01-01T03:00:00.000Z';
+    if (typeof date === 'string') {
+      return date === defaultDate;
+    } else if (date instanceof Date) {
+      return date.toISOString().startsWith(defaultDate);
+    }
+    return false;
+  }
   printPdf() {
     const part1 = document.getElementById('contentToConvertPart1');
     const part2 = document.getElementById('contentToConvertPart2');

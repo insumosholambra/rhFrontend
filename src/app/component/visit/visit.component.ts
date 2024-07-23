@@ -95,6 +95,11 @@ import Swal from 'sweetalert2';
     formData.CHEGADA = this.formatTime(formData.CHEGADA);
     formData.SAIDA = this.formatTime(formData.SAIDA);
 
+
+    formData.NEW_DATE = formData.NEW_DATE ? formData.NEW_DATE : '1970-01-01';
+    console.log(formData);
+
+
     if (this.visitForm.valid) {
       this.visitService.newVisit(formData).subscribe(
         res => {

@@ -89,8 +89,16 @@
       </div>
       <div class="details">
         <label for="visita-futu">Se sim, data agendada:</label>
-        <div class="value" id="visita-futu">{{ visit.NEW_DATE | date : "dd/MM/yyyy" }}</div>
+        <div class="value" id="visita-futu">
+          <ng-container *ngIf="isDefaultDate(visit.NEW_DATE); else dateTemplate">
+            Não há data agendada
+          </ng-container>
+          <ng-template #dateTemplate>
+            {{ visit.NEW_DATE | date: 'dd/MM/yyyy' }}
+          </ng-template>
+        </div>
       </div>
+
     </div>
   </div>
 
