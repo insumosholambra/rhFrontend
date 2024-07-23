@@ -184,6 +184,8 @@ export class VisitReportComponent implements OnInit, AfterViewInit {
   clearFilter() {
     this.filteredVisits = [...this.visits];
     this.dataSource.data = this.filteredVisits;
+    this.selectedCliente = ''
+    this.selectedName = ''
   }
 
   showDetails(visit: Visit) {
