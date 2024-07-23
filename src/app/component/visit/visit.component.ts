@@ -21,6 +21,9 @@ import Swal from 'sweetalert2';
   name!: string
   subname!: string
 
+  characterCount: number = 0;
+  maxCharacters: number = 254; // Defina o número máximo de caracteres permitidos
+
 
   constructor(
     private fb: FormBuilder,
@@ -131,6 +134,11 @@ import Swal from 'sweetalert2';
       }
       console.error('Formulário inválido');
     }
+  }
+
+  updateCharacterCount(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    this.characterCount = inputElement.value.length;
   }
 
 }

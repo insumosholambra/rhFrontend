@@ -78,3 +78,7 @@
 button{
   margin-top: 10px;
 }
+.input-group-text small {
+  font-size: 0.875rem;
+  color: #6c757d; /* Cor cinza para o contador de caracteres */
+}

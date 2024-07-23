@@ -49,7 +49,10 @@
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Objetivo da visita</span>
-          <input type="text" class="form-control" formControlName="OBJETIVO" placeholder="Objetivo da visita" aria-label="Objetivo da visita" />
+          <input type="text" class="form-control" formControlName="OBJETIVO" placeholder="Objetivo da visita" maxlength="254" aria-label="Objetivo da visita"     (input)="updateCharacterCount($event)" />
+          <span class="input-group-text">
+            <small>{{ characterCount }}/{{ maxCharacters }}</small>
+          </span>
         </div>
       </div>
       <div class="details">
@@ -75,11 +78,17 @@
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Motivo da Visita</span>
-          <input type="text" class="form-control" formControlName="MOTIVO" placeholder="Motivo da Visita" aria-label="Motivo da Visita" />
+          <input type="text" class="form-control" formControlName="MOTIVO" placeholder="Motivo da Visita" aria-label="Motivo da Visita" (input)="updateCharacterCount($event)"/>
+          <span class="input-group-text">
+            <small>{{ characterCount }}/{{ maxCharacters }}</small>
+          </span>
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Observação e Recomendações</span>
-          <input type="text" class="form-control" formControlName="ASSUNTO" placeholder="Observação e Recomendações" aria-label="Observação e Recomendações" />
+          <input type="text" class="form-control" formControlName="ASSUNTO" placeholder="Observação e Recomendações" aria-label="Observação e Recomendações" (input)="updateCharacterCount($event)"/>
+          <span class="input-group-text">
+            <small>{{ characterCount }}/{{ maxCharacters }}</small>
+          </span>
         </div>
       </div>
       <div class="observable">
@@ -88,15 +97,24 @@
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Problemas Identificados na Visita</span>
-          <input type="text" class="form-control" formControlName="PROBLEMAS" placeholder="Problemas Identificados na Visita" aria-label="Problemas Identificados na Visita" />
+          <input type="text" class="form-control" formControlName="PROBLEMAS" placeholder="Problemas Identificados na Visita" aria-label="Problemas Identificados na Visita" (input)="updateCharacterCount($event)" />
+          <span class="input-group-text">
+            <small>{{ characterCount }}/{{ maxCharacters }}</small>
+          </span>
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Condições da Propriedade</span>
-          <input type="text" class="form-control" formControlName="CONDICOES_PROP" placeholder="Condições da Propriedade" aria-label="Condições da Propriedade" />
+          <input type="text" class="form-control" formControlName="CONDICOES_PROP" placeholder="Condições da Propriedade" aria-label="Condições da Propriedade"(input)="updateCharacterCount($event)" />
+          <span class="input-group-text">
+            <small>{{ characterCount }}/{{ maxCharacters }}</small>
+          </span>
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Recomendações de Melhorias</span>
           <input type="text" class="form-control" formControlName="MELHORIAS" placeholder="Recomendações de Melhorias" aria-label="Recomendações de Melhorias" />
+          <span class="input-group-text">
+            <small>{{ characterCount }}/{{ maxCharacters }}</small>
+          </span>
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Necessidade de Visitas Futuras</span>
