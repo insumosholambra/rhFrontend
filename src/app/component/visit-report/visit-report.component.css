@@ -1,6 +1,23 @@
+*{
+  margin-bottom: 10px;
+}
+
 .container {
   width: 100%;
   overflow-x: auto;
+}
+
+.custom-modal-width{
+  width: 1200px !important;
+}
+
+.custom-modal-width .modal-content {
+  width: 1200px !important;
+}
+
+.container-lg{
+  margin-bottom: 10px !important;
+  height: 100vh;
 }
 
 .screen{

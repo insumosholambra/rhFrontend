@@ -1,11 +1,10 @@
-<div class="screen">
+<div class="container-lg mb-3">
   <h1>Relatório de Visitas</h1>
 
-  <div *ngIf="filteredVisits && filteredVisits.length > 0; else noData">
-    <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-
+  <div *ngIf="filteredVisits && filteredVisits.length > 0; else noData" class="mb-3">
+    <div style="display: flex; justify-content: space-between;">
       <div>
-        <mat-form-field *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'">
+        <mat-form-field *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'">
           <mat-label>Selecione um vendedor</mat-label>
           <mat-select [(ngModel)]="selectedName" name="name" (selectionChange)="filterVisitsByName()">
             <mat-option value="">Selecione um vendedor</mat-option>
@@ -15,7 +14,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field class="ml-3">
+        <mat-form-field >
           <mat-label>Selecione um Cliente</mat-label>
           <mat-select [(ngModel)]="selectedCliente" name="name" (selectionChange)="filterVisistByCliente()">
             <mat-option value="">Selecione um cliente</mat-option>
@@ -25,59 +24,45 @@
           </mat-select>
         </mat-form-field>
       </div>
-
       <div>
         <button class="btn btn-danger" (click)="clearFilter()">Limpar Filtro</button>
       </div>
-
     </div>
 
-    <table class="responsive-table">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Data da Visita</th>
-          <th>Cliente</th>
-          <th>Propriedade</th>
-          <th>Cidade</th>
-          <th>Cultura</th>
-          <th>Objetivo</th>
-          <th>Chegada</th>
-          <th>Saída</th>
-          <th>Contato</th>
-          <th>Motivo</th>
-          <th>Assunto</th>
-          <th>Condições da Propriedade</th>
-          <th>Problemas</th>
-          <th>Melhorias</th>
-          <th>Visita Futura</th>
-          <th>Nova Data</th>
-          <th>Data do Formulário</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let visit of filteredVisits">
-          <td data-label="Nome">{{ visit.NOME }} {{ visit.SOBRENOME }}</td>
-          <td data-label="Data da Visita">{{ visit.DATA_VISITA | date: 'dd/MM/yyyy' }}</td>
-          <td data-label="Cliente">{{ visit.CLIENTE }}</td>
-          <td data-label="Propriedade">{{ visit.PROPRIEDADE }}</td>
-          <td data-label="Cidade">{{ visit.CIDADE }}</td>
-          <td data-label="Cultura">{{ visit.CULTURA }}</td>
-          <td data-label="Objetivo">{{ visit.OBJETIVO }}</td>
-          <td data-label="Chegada">{{ visit.CHEGADA | date: 'shortTime' }}</td>
-          <td data-label="Saída">{{ visit.SAIDA | date: 'shortTime' }}</td>
-          <td data-label="Contato">{{ visit.CONTATO }}</td>
-          <td data-label="Motivo">{{ visit.MOTIVO }}</td>
-          <td data-label="Assunto">{{ visit.ASSUNTO }}</td>
-          <td data-label="Condições da Propriedade">{{ visit.CONDICOES_PROP }}</td>
-          <td data-label="Problemas">{{ visit.PROBLEMAS }}</td>
-          <td data-label="Melhorias">{{ visit.MELHORIAS }}</td>
-          <td data-label="Visita Futura">{{ visit.VISITA_FUTU === 'true' ? 'Sim' : 'Não' }}</td>
-          <td data-label="Nova Data">{{ visit.NEW_DATE | date: 'dd/MM/yyyy' }}</td>
-          <td data-label="Data do Formulário">{{ visit.DATA_FORM | date: 'dd/MM/yyyy' }}</td>
-        </tr>
-      </tbody>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let visit">{{ visit.NOME }} {{ visit.SOBRENOME }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataVisita">
+        <th mat-header-cell *matHeaderCellDef (click)="sortByDate()">
+          Data da Visita
+          <mat-icon *ngIf="sortDirection === 'asc'">arrow_upward</mat-icon>
+          <mat-icon *ngIf="sortDirection === 'desc'">arrow_downward</mat-icon>
+        </th>
+        <td mat-cell *matCellDef="let visit">{{ visit.DATA_VISITA | date: 'dd/MM/yyyy' }}</td>
+      </ng-container>
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef>Cliente</th>
+        <td mat-cell *matCellDef="let visit">{{ visit.CLIENTE }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="detalhes">
+        <th mat-header-cell *matHeaderCellDef>Detalhes</th>
+        <td mat-cell *matCellDef="let visit">
+          <button class="btn btn-primary" (click)="showDetails(visit)">Detalhes</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+
+
+
+
   </div>
 
   <ng-template #noData>

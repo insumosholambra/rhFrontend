@@ -10,6 +10,7 @@ import { LoginService } from '../../core/services/login.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from './auth.service';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,9 @@ import { AuthService } from './auth.service';
     MatIconModule,
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormField,
+    MatLabel
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],

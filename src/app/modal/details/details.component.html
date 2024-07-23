@@ -1,0 +1,102 @@
+<body>
+  <div id="contentToConvertPart1">
+    <div style="width: 100%; border: 1px solid gainsboro; padding: 10px; margin-top: 20px;">
+      <h1>Detalhes da Visita</h1>
+      <h2>{{ visit.NOME }} {{ visit.SOBRENOME }}</h2>
+      <div class="details">
+        <label for="data-visita">Data da Visita:</label>
+        <div class="value" id="data-visita">{{ visit.DATA_VISITA | date : "dd/MM/yyyy" }}</div>
+      </div>
+      <div class="details">
+        <label for="cliente">Cliente:</label>
+        <div class="value" id="cliente">{{ visit.CLIENTE }}</div>
+      </div>
+      <div class="details">
+        <label for="propriedade">Propriedade:</label>
+        <div class="value" id="propriedade">{{ visit.PROPRIEDADE }}</div>
+      </div>
+      <div class="details">
+        <label for="contato">Contato:</label>
+        <div class="value" id="contato">{{ visit.CONTATO }}</div>
+      </div>
+      <div class="details">
+        <label for="cidade">Cidade:</label>
+        <div class="value" id="cidade">{{ visit.CIDADE }}</div>
+      </div>
+      <div class="details">
+        <label for="cultura">Cultura:</label>
+        <div class="value" id="cultura">{{ visit.CULTURA || "Não informado" }}</div>
+      </div>
+    </div>
+
+    <div style="width: 100%; border: 1px solid gainsboro; padding: 10px; margin-top: 10px;">
+      <h1>Objetivo da visita</h1>
+      <div class="details">
+        <label for="objetivo">Objetivo:</label>
+        <div class="value" id="objetivo">{{ visit.OBJETIVO || "Não informado" }}</div>
+      </div>
+    </div>
+
+    <div style="width: 100%; border: 1px solid gainsboro; padding: 10px; margin-top: 20px;">
+      <h1>Hora de chegada e saída</h1>
+      <div class="details">
+        <label for="chegada">Chegada:</label>
+        <div class="value" id="chegada">{{ visit.CHEGADA ?? "" | timeFormatter }}</div>
+      </div>
+      <div class="details">
+        <label for="saida">Saída:</label>
+        <div class="value" id="saida">{{ visit.SAIDA ?? "" | timeFormatter }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="contentToConvertPart2">
+    <div style="width: 100%; border: 1px solid gainsboro; padding: 10px; margin-top: 20px;">
+      <h1>Descrição da Visita</h1>
+      <div class="details">
+        <label for="assunto">Assunto:</label>
+        <div class="value" id="assunto">{{ visit.ASSUNTO || "Não informado" }}</div>
+      </div>
+      <div class="details">
+        <label for="condicoes-prop">Condições da Propriedade:</label>
+        <div class="value" id="condicoes-prop">{{ visit.CONDICOES_PROP || "Não informado" }}</div>
+      </div>
+      <div class="details">
+        <label for="melhorias">Melhorias:</label>
+        <div class="value" id="melhorias">{{ visit.MELHORIAS || "Não informado" }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="contentToConvertPart3">
+    <div style="width: 100%; border: 1px solid gainsboro; padding: 10px; margin-top: 20px;">
+      <h1>Motivo</h1>
+      <div class="details">
+        <label for="motivo">Motivo:</label>
+        <div class="value" id="motivo">{{ visit.MOTIVO || "Não informado" }}</div>
+      </div>
+      <div class="details">
+        <label for="problemas">Problemas:</label>
+        <div class="value" id="problemas">{{ visit.PROBLEMAS || "Não informado" }}</div>
+      </div>
+      <div class="details">
+        <label for="data-form">Data de preenchimento do formulário:</label>
+        <div class="value" id="data-form">{{ visit.DATA_FORM | date : "dd/MM/yyyy" }}</div>
+      </div>
+      <div class="details">
+        <label for="visita-futu">Visita Futura:</label>
+        <div class="value" id="visita-futu">{{ visit.VISITA_FUTU === "true" ? "Sim" : "Não" }}</div>
+      </div>
+      <div class="details">
+        <label for="visita-futu">Se sim, data agendada:</label>
+        <div class="value" id="visita-futu">{{ visit.NEW_DATE | date : "dd/MM/yyyy" }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="width: 100%; display: flex; justify-content: center; align-items: center;">
+    <button class="btn btn-primary" (click)="printPdf()" style="margin-top: 10px; width: 200px; height: 40px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      Salvar como PDF
+    </button>
+  </div>
+</body>
