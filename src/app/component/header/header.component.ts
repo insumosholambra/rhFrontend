@@ -1,6 +1,6 @@
 import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 import { EmployeeListService } from '../../core/services/employee-list.service';
@@ -8,7 +8,7 @@ import { EmployeeListService } from '../../core/services/employee-list.service';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   providers: [EmployeeListService]
@@ -28,6 +28,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   cargo: any;
   isHome: boolean = true;
   isRh: boolean = true;
+  showCatalog: boolean = false;
+
 
   ngOnInit() {
     this.updateRoute();
@@ -68,6 +70,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   home() {
     this.router.navigate(['/home']);
+  }
+
+  profile() {
+    this.router.navigate(['/home/profile']);
   }
 
   register() {
@@ -122,5 +128,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   visitReport() {
     this.router.navigate(['/home/visit-report']);
+  }
+
+  navigateTo(route: string) {
+    console.log(route);
+
+    this.router.navigate([route]);
+  }
+
+  toggleCatalog(event: Event) {
+    event.preventDefault();
+    this.showCatalog = !this.showCatalog;
   }
 }

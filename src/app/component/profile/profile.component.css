@@ -35,8 +35,8 @@ button {
 .img {
   border: 1px solid;
   border-color: #b8b8b8;
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -50,7 +50,7 @@ button {
 }
 
 .img img {
-  width: 60%;
+  width: 100%;
   height: auto;
   max-width: 100%;
 }

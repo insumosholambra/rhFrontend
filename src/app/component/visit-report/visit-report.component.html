@@ -14,7 +14,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field >
+        <mat-form-field *ngIf="this.cargo === 'Eng Agrônomo'">
           <mat-label>Selecione um Cliente</mat-label>
           <mat-select [(ngModel)]="selectedCliente" name="name" (selectionChange)="filterVisistByCliente()">
             <mat-option value="">Selecione um cliente</mat-option>
@@ -23,6 +23,18 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+
+        <!-- <mat-form-field >
+          <mat-label>Selecione um Cliente</mat-label>
+          <mat-select [(ngModel)]="selectedCliente" name="name" (selectionChange)="filterVisistByCliente()">
+            <mat-option value="">Selecione um cliente</mat-option>
+            <mat-option *ngFor="let client of clients" [value]="client">
+              {{ client }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+
       </div>
       <div>
         <button class="btn btn-danger" (click)="clearFilter()">Limpar Filtro</button>

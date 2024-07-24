@@ -1,0 +1,81 @@
+table {
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: 5%;
+}
+th, td {
+    border: 1px solid rgb(187, 187, 187);
+    padding: 5px;
+    
+}
+
+th {
+    background-color: #FD7D07;
+    text-align: center;
+    
+}
+
+/* Seu componente CSS */
+.alphabet-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  flex-wrap: wrap; /* Permitir que os elementos quebrem para a próxima linha */
+}
+
+.alphabet-bar span {
+  cursor: pointer;
+  padding: 5px 10px;
+  margin: 2px; /* Reduzir a margem para dar mais espaço em telas menores */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.alphabet-bar span:hover {
+  background-color: #f0f0f0;
+}
+
+
+  
+  pagination-controls ::ng-deep li,
+  pagination-controls ::ng-deep .small-screen {
+    border-radius: 3px;
+  }
+  
+  pagination-controls ::ng-deep li.current {
+    background: #f78e1f;
+    cursor: default;
+    border-radius: 10px;  
+  }
+
+  @media (min-width: 1080px) {
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      margin-left: 135px;
+    }
+  }
+
+  .green-circle {
+    width: 16px; /* Adjust the width and height as needed */
+    height: 16px;
+    background-color: green;
+    border-radius: 50%; /* Makes it a circle */
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 45%; /* Adjust spacing as needed */
+    margin-top: 8px;
+  }
+  
+  .green-red{
+    width: 16px; /* Adjust the width and height as needed */
+    height: 16px;
+    background-color: red;
+    border-radius: 50%; /* Makes it a circle */
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 45%; /* Adjust spacing as needed */
+    margin-top: 8px;
+  }
+  

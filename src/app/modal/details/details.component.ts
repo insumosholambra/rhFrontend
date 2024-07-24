@@ -37,32 +37,42 @@ export class DetailsComponent {
     const part3 = document.getElementById('contentToConvertPart3');
 
     if (part1 && part2 && part3) {
-      html2canvas(part1, { scrollY: -window.scrollY }).then((canvas1) => {
-        const imgWidth = 210; // Largura A4 em mm
-        const pageHeight = 295; // Altura A4 em mm
-        const imgHeight1 = (canvas1.height * imgWidth) / canvas1.width;
+        html2canvas(part1, { scale: 2, scrollY: -window.scrollY }).then((canvas1) => {
+            html2canvas(part2, { scale: 2, scrollY: -window.scrollY }).then((canvas2) => {
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
 
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        pdf.addImage(canvas1, 'PNG', 0, 0, imgWidth, imgHeight1);
+                const imgWidth1 = canvas1.width / 2;
+                const imgHeight1 = canvas1.height / 2;
+                const imgWidth2 = canvas2.width / 2;
+                const imgHeight2 = canvas2.height / 2;
 
-        html2canvas(part2, { scrollY: -window.scrollY }).then((canvas2) => {
-          const imgHeight2 = (canvas2.height * imgWidth) / canvas2.width;
+                const ratio1 = Math.min(pageWidth / imgWidth1, pageHeight / imgHeight1);
+                const ratio2 = Math.min(pageWidth / imgWidth2, pageHeight / imgHeight2);
 
-          pdf.addImage(canvas2, 'PNG', 0, imgHeight1, imgWidth, imgHeight2);
+                // Adiciona a primeira parte na posição inicial (0, 0)
+                pdf.addImage(canvas1.toDataURL('image/png', 1.0), 'PNG', 0, 0, imgWidth1 * ratio1, imgHeight1 * ratio1);
 
-          html2canvas(part3, { scrollY: -window.scrollY }).then((canvas3) => {
-            const imgHeight3 = (canvas3.height * imgWidth) / canvas3.width;
+                // Adiciona a segunda parte logo abaixo da primeira
+                const secondPartY = imgHeight1 * ratio1 + 10; // 10 mm de espaço entre as partes
+                pdf.addImage(canvas2.toDataURL('image/png', 1.0), 'PNG', 0, secondPartY, imgWidth2 * ratio2, imgHeight2 * ratio2);
 
-            pdf.addPage();
-            pdf.addImage(canvas3, 'PNG', 0, 0, imgWidth, imgHeight3);
+                // Captura a terceira parte e adiciona na segunda página
+                html2canvas(part3, { scale: 2, scrollY: -window.scrollY }).then((canvas3) => {
+                    const imgWidth3 = canvas3.width / 2;
+                    const imgHeight3 = canvas3.height / 2;
+                    const ratio3 = Math.min(pageWidth / imgWidth3, pageHeight / imgHeight3);
 
-            pdf.save('relatorio-de-visitas.pdf');
-          });
+                    pdf.addPage();
+                    pdf.addImage(canvas3.toDataURL('image/png', 1.0), 'PNG', 0, 0, imgWidth3 * ratio3, imgHeight3 * ratio3);
+
+                    pdf.save('relatorio-de-visitas.pdf');
+                });
+            });
         });
-      });
     }
-  }
-
+}
 
 
 }

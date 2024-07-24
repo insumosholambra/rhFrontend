@@ -5,18 +5,15 @@ import { environment } from '../../environment/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private token: string | null = null;
   private helper = new JwtHelperService();
 
-
-
-  constructor(){
+  constructor() {
     this.token = localStorage.getItem('token'); // Carregar o token do localStorage
-    this.getUserInfo()
+    this.getUserInfo();
   }
 
   setToken(token: string) {
@@ -24,7 +21,7 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return this.token
+    return this.token;
   }
 
   // Função para decodificar o token
@@ -37,7 +34,7 @@ export class AuthService {
           subname: decodedToken.subname,
           cargo: decodedToken.cargo.DESCRICAO,
           id: decodedToken.id,
-          departamento: decodedToken.departamento.DESCRICAO
+          departamento: decodedToken.departamento.DESCRICAO,
         };
       } catch (error) {
         console.error('Erro ao decodificar token:', error);
@@ -46,7 +43,6 @@ export class AuthService {
     }
     return null;
   }
-
 
   // Função para obter informações do usuário
   getUserInfo(): any {
@@ -76,4 +72,3 @@ export class AuthService {
 function jwtDecode(token: string): any {
   throw new Error('Function not implemented.');
 }
-

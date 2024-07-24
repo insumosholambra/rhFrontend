@@ -5,11 +5,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from '../../core/services/login.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { AuthService } from './auth.service';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 
 @Component({
@@ -56,7 +55,6 @@ export class LoginComponent implements OnInit {
         error => {
           let errorMessage = 'Parece que nosso sistema está instável. Por favor, aguarde enquanto solucionamos o problema';
 
-          // Verifica se existe uma mensagem de erro personalizada do backend
           if (error.error && error.error.message) {
             if (error.error.message === 'User not found') {
               errorMessage = 'Usuário não encontrado. Verifique seu ID e senha e tente novamente.';

@@ -1,42 +1,72 @@
 <nav class="navbar navbar-expand-lg rounded" aria-label="Thirteenth navbar example" style="background-color: #fd9d43;">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
+      aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
       <a class="navbar-brand col-lg-3 me-0">Insumos Holambra</a>
       <ul class="navbar-nav col-lg-6 justify-content-lg-center">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             Menu
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home'}" (click)="home()">Home</a></li>
-            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'" [ngClass]="{'active': rota === '/home/register'}" (click)="register()">Cadastro de funcionários</a></li>
-            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'" [ngClass]="{'active': rota === '/home/employee-list'}" (click)="list()">Lista de Funcionários</a></li>
-            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'" [ngClass]="{'active': rota === '/home/role-register'}" (click)="registerRole()">Cadastro de cargos</a></li>
-            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'" [ngClass]="{'active': rota === '/home/role-list'}" (click)="listRoles()">Lista de Cargos</a></li>
-            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'" [ngClass]="{'active': rota === '/home/department-register'}" (click)="registerDepartments()">Cadastro de departamentos</a></li>
-            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'" [ngClass]="{'active': rota === '/home/department-list'}" (click)="listDepartments()">Lista de departamentos</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/visit'}" (click)="visit()">Cadastrar Visita</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/visit-report'}" (click)="visitReport()">Relatório de Visitas</a></li>
-            <!-- <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/my-profile'}" (click)="myProfile()">Meus dados</a></li> -->
-            <!-- <li><a class="dropdown-item" [ngClass]="{'active': rota === '/vacation'}" (click)="vacations()">Férias</a></li> -->
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/docs-list'}" (click)="readDocs()">Documentos e Arquivos</a></li>
-            <li><a class="dropdown-item" *ngIf="this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo'" [ngClass]="{'active': rota === '/home/docs-register'}" (click)="sendDocs()">Envio de arquivos</a></li>
 
+            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/profile'}" (click)="profile()">Perfil</a></li>
+            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
+                [ngClass]="{'active': rota === '/home/register'}" (click)="register()">Cadastro de funcionários</a></li>
+            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
+                [ngClass]="{'active': rota === '/home/employee-list'}" (click)="list()">Lista de Funcionários</a></li>
+            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
+                [ngClass]="{'active': rota === '/home/role-register'}" (click)="registerRole()">Cadastro de cargos</a>
+            </li>
+            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
+                [ngClass]="{'active': rota === '/home/role-list'}" (click)="listRoles()">Lista de Cargos</a></li>
+            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
+                [ngClass]="{'active': rota === '/home/department-register'}" (click)="registerDepartments()">Cadastro de
+                departamentos</a></li>
+            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
+                [ngClass]="{'active': rota === '/home/department-list'}" (click)="listDepartments()">Lista de
+                departamentos</a></li>
+            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/visit'}" (click)="visit()">Cadastrar
+                Visita</a></li>
+            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/visit-report'}"
+                (click)="visitReport()">Relatório de Visitas</a></li>
+            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/docs-list'}"
+                (click)="readDocs()">Documentos e Arquivos</a></li>
+            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
+                [ngClass]="{'active': rota === '/home/docs-register'}" (click)="sendDocs()">Envio de arquivos</a></li>
+            <li class="dropdown-submenu">
+              <a class="dropdown-item dropdown-toggle" href="#" (click)="toggleCatalog($event)">Catálogo</a>
+              <ul class="dropdown-menu" [class.show]="showCatalog">
+                <li><a class="dropdown-item" [ngClass]="{'active': rota === '/catalog/defensivos'}" [routerLink]="['/home/catalog/defensivo']" routerLinkActive="router-link-active">Defensivos</a></li>
+                <li><a class="dropdown-item" [ngClass]="{'active': rota === '/catalog/fertilizantes'}" [routerLink]="['/home/catalog/fertilizante']">Fertilizantes</a></li>
+                <li><a class="dropdown-item" [ngClass]="{'active': rota === '/catalog/biologicos'}" [routerLink]="['/home/catalog/biologicos']">Biológicos</a></li>
+                <li><a class="dropdown-item" [ngClass]="{'active': rota === '/catalog/plast'}" [routerLink]="['/home/catalog/plast']">Plásticos e Telas</a></li>
+                <li><a class="dropdown-item" [ngClass]="{'active': rota === '/catalog/embalagens'}" [routerLink]="['/home/catalog/embalagens']">Embalagens</a></li>
+
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
+
       <div class="d-lg-flex col-lg-3 justify-content-lg-end">
         <div>
-          <h2>{{ name }}<h5>{{ this.cargo }}</h5></h2>
+          <h2>{{ name }}</h2>
+          <h5>{{ cargo }}</h5>
         </div>
         <div style="padding: 3px; margin-left: 10px; cursor: pointer;">
           <a (click)="exit()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
-              <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+              class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+              <path fill-rule="evenodd"
+                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
             </svg>
           </a>
         </div>

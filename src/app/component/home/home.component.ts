@@ -5,11 +5,12 @@ import { LayoutComponent } from '../layout/layout.component';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from '../profile/profile.component';
 import { UserService } from '../../core/services/user.service';
+import { DashboardComponent } from "../dashboard/dashboard.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [LayoutComponent, CommonModule, ProfileComponent],
+  imports: [LayoutComponent, CommonModule, ProfileComponent, DashboardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   providers: [UserService]

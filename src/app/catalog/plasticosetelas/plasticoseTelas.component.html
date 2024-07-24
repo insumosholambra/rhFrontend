@@ -1,0 +1,84 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B2SM11FJCT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B2SM11FJCT');
+</script>
+
+<div>
+  <img src="../assets/PlasticosTelas.webp" alt="Plasticos" style="width: 100%;"/>
+
+  <!-- Barra com o alfabeto -->
+
+  <div class="alphabet-bar">
+    <span *ngFor="let letter of alphabet" (click)="filterByLetter(letter)">{{ letter }}</span>
+  </div>
+
+  <div class="search-container" style="display: flex; width: 70%; margin-left: 15%;">
+    <!-- <input id="typeahead-format" type="text" class="form-control" placeholder="Busque aqui" [(ngModel)]="searchTerm"
+      (keyup)="filterBySearchTerm()" /> -->
+
+        <div style="width: 70%;">
+        <input style="border-top: none; border-left: none; border-right: none; background-color: #ffffff52 ; height: 56px;" id="typeahead-format" type="text" class="form-control" placeholder="Busque aqui" [(ngModel)]="searchTerm" (keyup)="filterBySearchTerm()" />
+        </div>
+
+
+    <!-- <select class="form-control" [(ngModel)]="selectedFamily" (change)="filterByFamily()" placeholder="Busque aqui">
+       <option value="">Filtrar por Família</option>
+
+      <option *ngFor="let family of uniqueFamilies" [value]="family"><svg cIcon name="cilMenu" size="lg"></svg>{{ family }}</option>
+      <i class="cil-filter"></i>
+    </select> -->
+
+    <mat-form-field style="width: 270px;">
+      <mat-label>Filtre por Disponibilidade</mat-label>
+      <mat-select [(ngModel)]="selectedAvailability" (ngModelChange)="aplicarFiltros()">
+        <mat-option [value]="'available'">Disponível</mat-option>
+        <mat-option [value]="'unavailable'">Indisponível</mat-option>
+        <mat-option [value]="'general'">Todos</mat-option>
+
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field style="width: 270px;">
+      <mat-label>Selecionar uma família</mat-label>
+      <mat-select [(ngModel)]="selectedFamily" (ngModelChange)="aplicarFiltros()">
+        <mat-option value="">Todas as Famílias</mat-option>
+        <mat-option *ngFor="let family of uniqueFamilies" [value]="family">{{ family }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <!-- Tabela com os dados filtrados -->
+  <div class="table">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 30%;">Produto</th>
+          <th style="width: 20%;">Unidade</th>
+          <th style="width: 25%;">Família</th>
+          <th style="width: 20%;">Disponível</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Loop para exibir os dados filtrados -->
+        <tr *ngFor="let dado of filteredplastelas | paginate: { itemsPerPage: 15, currentPage: p, id: 'fertilizantesList' } " style="border-right: solid 1px #bbbbbb; border: #bbbbbb solid 1px; ">
+          <td>{{ dado.DESCRICAO }}</td>
+          <td>{{ dado.UNIDADE }}</td>
+          <td>{{ dado.FAMILIA }}</td>
+          <td *ngIf="dado.SALDO_DISPONIVEL != 0 || dado.SALDO > 0" [ngClass]="{'green-circle': dado.SALDO_DISPONIVEL != 0 || dado.SALDO > 0}"></td>
+          <td *ngIf="dado.SALDO_DISPONIVEL == 0 || dado.SALDO < 0" [ngClass]="{'green-red': dado.SALDO_DISPONIVEL == 0 || dado.SALDO < 0}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="card-footer" style="text-align: center; margin-top: auto">
+      <pagination-controls id="fertilizantesList" (pageChange)="p = $event" nextLabel="Proximo"
+        previousLabel="Anterior"></pagination-controls>
+    </div>
+  </div>
+</div>

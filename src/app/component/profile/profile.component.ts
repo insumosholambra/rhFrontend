@@ -4,13 +4,15 @@ import { UserService } from '../../core/services/user.service';
 import { Employee } from '../../model/employee.model';
 import { CpfFormatPipe } from '../../shared/cpf-format';
 import { SharedModule } from '../../shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ SharedModule ],
+  imports: [ SharedModule , HttpClientModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
+  providers: [UserService]
 })
 export class ProfileComponent {
 

@@ -25,7 +25,8 @@ const module = [
   MatInputModule,
   MatTableModule,
   MatSortModule,
-  MatIconModule
+  MatIconModule,
+  HttpClientModule
 ];
 
 @Component({
@@ -191,8 +192,7 @@ export class VisitReportComponent implements OnInit, AfterViewInit {
   showDetails(visit: Visit) {
     this.selectedVisit = visit;
     const initialState = { visit: this.selectedVisit };
-    this.modalRef = this.modalService.show(DetailsComponent, { initialState,  class: 'gray custom-modal-width' // Adicione suas classes aqui
-    });
+    this.modalRef = this.modalService.show(DetailsComponent, { initialState,  class: 'gray custom-modal-width' });
   }
 
   sortByDate() {

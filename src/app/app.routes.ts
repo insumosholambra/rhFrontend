@@ -14,6 +14,12 @@ import { DocsListComponent } from './component/lists/docs-list/docs-list.compone
 import { holidayRoutes } from './component/holiday/holiday-routes';
 import { VisitComponent } from './component/visit/visit.component';
 import { VisitReportComponent } from './component/visit-report/visit-report.component';
+import { BiologicosComponent } from './catalog/biologicos/biologicos.component';
+import { DefensivosComponent } from './catalog/defensivos/defensivos.component';
+import { FertilizantesComponent } from './catalog/fertilizantes/fertilizantes.component';
+import { PlasticoseTelasComponent } from './catalog/plasticosetelas/plasticoseTelas.component';
+import { EmbalagensComponent } from './catalog/embalagens/embalagens.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +30,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: HomeComponent },
+      { path: 'profile', component: ProfileComponent },
       { path: 'register', component: UserComponent },
       { path: 'employee-list', component: EmployeeListComponent },
       { path: 'department-register', component: DepartmentComponent },
@@ -34,6 +41,12 @@ export const routes: Routes = [
       { path: 'docs-list', component: DocsListComponent },
       { path: 'visit', component: VisitComponent },
       { path: 'visit-report', component: VisitReportComponent },
+      { path: 'catalog/biologicos', component: BiologicosComponent },
+      { path: 'catalog/defensivo', component: DefensivosComponent},
+      { path: 'catalog/fertilizante', component: FertilizantesComponent},
+      { path: 'catalog/plast', component: PlasticoseTelasComponent},
+      { path: 'catalog/embalagens', component: EmbalagensComponent}
+
 
     ]
   },
