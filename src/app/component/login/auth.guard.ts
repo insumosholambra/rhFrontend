@@ -19,13 +19,13 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    if (this.authService.isTokenExpired()) {
-      Swal.fire({
-        icon: 'info',
-        title: 'Sua sessão expirou',
-        text: 'Por favor, faça o login novamente',
-      });
-    }
+    // if (this.authService.isTokenExpired()) {
+    //   Swal.fire({
+    //     icon: 'info',
+    //     title: 'Sua sessão expirou',
+    //     text: 'Por favor, faça o login novamente',
+    //   });
+    // }
 
     this.router.navigate(['/login']);
     return false;
