@@ -27,7 +27,7 @@ export const routes: Routes = [
   {
     path: 'home',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       { path: '', component: HomeComponent },
       { path: 'profile', component: ProfileComponent },
