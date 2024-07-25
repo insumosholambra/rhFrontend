@@ -1,11 +1,13 @@
 <body>
   <div id="contentToConvertPart1">
-    <div style="
+    <div
+      style="
         width: 100%;
         border: 1px solid gainsboro;
         padding: 10px;
         margin-top: 20px;
-      ">
+      "
+    >
       <h1>Detalhes da Visita</h1>
       <h2>{{ visit.NOME }} {{ visit.SOBRENOME }}</h2>
       <div class="details">
@@ -17,6 +19,10 @@
       <div class="details">
         <label for="cliente">Cliente:</label>
         <div class="value" id="cliente">{{ visit.CLIENTE }}</div>
+      </div>
+      <div class="details">
+        <label for="cliente">Tipo de cliente:</label>
+        <div class="value" id="cliente">{{ visit.TIPO_CLI }}</div>
       </div>
       <div class="details">
         <label for="propriedade">Propriedade:</label>
@@ -38,12 +44,14 @@
       </div>
     </div>
 
-    <div style="
+    <div
+      style="
         width: 100%;
         border: 1px solid gainsboro;
         padding: 10px;
         margin-top: 10px;
-      ">
+      "
+    >
       <h1>Objetivo da visita</h1>
       <div class="details">
         <label for="objetivo">Objetivo:</label>
@@ -53,15 +61,16 @@
       </div>
     </div>
 
-    <div style="
+    <div
+      style="
         width: 100%;
         border: 1px solid gainsboro;
         padding: 10px;
         margin-top: 20px;
-
-      ">
+      "
+    >
       <h1>Hora de chegada e saída</h1>
-      <div style="display: flex; justify-content: space-evenly; ">
+      <div style="display: flex; justify-content: space-evenly">
         <div class="details">
           <label for="chegada">Chegada:</label>
           <div class="value" id="chegada">
@@ -79,12 +88,14 @@
   </div>
 
   <div id="contentToConvertPart2">
-    <div style="
+    <div
+      style="
         width: 100%;
         border: 1px solid gainsboro;
         padding: 10px;
         margin-top: 20px;
-      ">
+      "
+    >
       <h1>Descrição da Visita</h1>
       <div class="details">
         <label for="assunto">Assunto:</label>
@@ -108,12 +119,14 @@
   </div>
 
   <div id="contentToConvertPart3">
-    <div style="
+    <div
+      style="
         width: 100%;
         border: 1px solid gainsboro;
         padding: 10px;
         margin-top: 20px;
-      ">
+      "
+    >
       <h1>Motivo</h1>
       <div class="details">
         <label for="motivo">Motivo:</label>
@@ -137,7 +150,9 @@
       <div class="details">
         <label for="visita-futu">Se sim, data agendada:</label>
         <div class="value" id="visita-futu">
-          <ng-container *ngIf="isDefaultDate(visit.NEW_DATE); else dateTemplate">
+          <ng-container
+            *ngIf="isDefaultDate(visit.NEW_DATE); else dateTemplate"
+          >
             Não há data agendada
           </ng-container>
           <ng-template #dateTemplate>
@@ -154,13 +169,18 @@
     </div>
   </div>
 
-  <div style="
+  <div
+    style="
       width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-    ">
-    <button class="btn btn-primary" (click)="printPdf()" style="
+    "
+  >
+    <button
+      class="btn btn-primary"
+      (click)="printPdf()"
+      style="
         margin-top: 10px;
         width: 200px;
         height: 40px;
@@ -168,7 +188,8 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-      ">
+      "
+    >
       Salvar como PDF
     </button>
   </div>
