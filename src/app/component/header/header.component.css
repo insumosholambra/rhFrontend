@@ -1,77 +1,92 @@
-*, a {
-  color: aliceblue;
+/* Cor padrão para hover */
+:root {
+  --hover-color: #f18723; /* Altere para a cor desejada */
 }
 
-.container-fluid {
-  width: 100%;
+.navbar {
+  background-color: #3C4B64 !important;
 }
 
-button {
-  width: 50px;
-  height: 50px;
-  border: none;
-  border-radius: 5px;
-  background-color: #fd9d43;
-  color: white;
-
+.navbar-brand, .nav-link {
+  color: aliceblue !important;
 }
 
-button:hover {
-  background-color: white;
-  color: #fd9d43;
-}
-
-.house-icon {
-  fill: #fff;
-  transition: fill 0.1s ease;
-}
-
-button:hover .house-icon {
-  fill: #fd9d43;
+.nav-link.active {
+  background-color: #e08530;
+  color: white !important;
+  border-radius: 10px;
 
 }
 
-.back{
-  padding: 20px;
-}
-.navbar-nav .nav-item .dropdown-menu {
-  display: none;
-  position: absolute;
-  background-color: #bbbbbb;
-  border: none;
+.navbar-nav .dropdown-menu {
+  background-color: #ffffff;
 }
 
-.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
-  display: block;
+.dropdown {
+  z-index: 10000;
+}
+
+.nav-item:hover {
+  background-color: #e08530;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  background-color: #fafafa;
 }
 
 .dropdown-item {
   color: #000000;
-  padding: 20px 30px;
+  padding: 10px 20px;
   text-decoration: none;
   cursor: pointer;
+  font-size: 18px;
 }
 
-.dropdown-item:hover {
-  background-color: #f18723;
-  color: #fff;
+.dropdown-item:hover, .btn:hover {
+  background-color: #e08530;
+  color: #ffffff;
+}
 
+.dropdown-menu.show {
+  display: block;
+}
+
+.color-white {
+  color: white;
+}
+
+.ml-3 {
+  margin-left: 100px;
+}
+
+h4 {
+  font-weight: 500;
+  color: white;
+}
+
+small{
+  color: white;
+}
+
+.btn{
+  background-color: #fd9d43;
+  border: none;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
+.btn-sm{
+  width: 50px;
+  height: 30px;
+  border: 1px solid white;
+  color: white;
 }
 .active {
-  background-color: #e08530; /* Alterar a cor de fundo ou qualquer outra propriedade que deseje */
-  color: white; /* Alterar a cor do texto ou qualquer outra propriedade que deseje */
+  background-color: #ffffff;
+  color: #FD7D07;
 }
-/* Para garantir que o submenu apareça ao passar o mouse */
-.dropdown-submenu {
-  position: relative;
-}
-
-.dropdown-submenu .dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -1px;
-}
-
-.dropdown-submenu:hover .dropdown-menu {
-  display: block;
+.nav-link{
+  font-size: 17px;
 }

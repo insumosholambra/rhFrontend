@@ -46,7 +46,14 @@ button {
 }
 
 .row{
-  height: 90vh;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin-left: 10%;
+  border: 1px solid rgb(207, 207, 207);
+  border-radius: 10px;
 }
 
 .img img {

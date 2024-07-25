@@ -19,5 +19,6 @@ export interface Visit {
   VISITA_FUTU?: string;
   NEW_DATE?: Date;
   DATA_FORM: Date;
+  TIPO_CLI: string;
 
 }

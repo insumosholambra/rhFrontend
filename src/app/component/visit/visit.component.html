@@ -31,6 +31,22 @@
           <input type="text" class="form-control" formControlName="CLIENTE" placeholder="Cliente" aria-label="Cliente" />
         </div>
         <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Tipo de cliente</span>
+          <div class="form-check form-check-inline" style="margin-left: 10px;">
+
+            <input class="form-check-input" type="radio" id="Cooperado" formControlName="TIPO_CLI" [value]="'Cooperado'" />
+            <label class="form-check-label" for="Cooperado">Cooperado</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="Terceiro" formControlName="TIPO_CLI" [value]="'Terceiro'" />
+            <label class="form-check-label" for="Terceiro">Terceiro</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" id="Prospect" formControlName="TIPO_CLI" [value]="'Prospect'" />
+            <label class="form-check-label" for="Prospect">Prospect</label>
+          </div>
+        </div>
+        <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Propriedade</span>
           <input type="text" class="form-control" formControlName="PROPRIEDADE" placeholder="Propriedade" aria-label="Propriedade" />
         </div>
@@ -116,6 +132,7 @@
             <small>{{ characterCount }}/{{ maxCharacters }}</small>
           </span> -->
         </div>
+
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Necessidade de Visitas Futuras</span>
           <div class="form-check form-check-inline" style="margin-left: 10px;">
@@ -128,6 +145,7 @@
             <label class="form-check-label" for="nao">Não</label>
           </div>
         </div>
+
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Se sim, informe uma previsão de data</span>
           <input type="date" class="form-control" formControlName="NEW_DATE" placeholder="Previsão de Data" aria-label="Previsão de Data" />

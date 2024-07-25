@@ -27,9 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   name: string = '';
   cargo: any;
   isHome: boolean = true;
-  isRh: boolean = true;
-  showCatalog: boolean = false;
-
+  isRh: boolean = false;
 
   ngOnInit() {
     this.updateRoute();
@@ -58,86 +56,21 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   getName() {
-
-    const id = localStorage.getItem('id')
+    const id = localStorage.getItem('id');
 
     this.employeeService.userById(Number(id)).subscribe(res => {
-      this.name = `${res.NOME} ${res.SOBRENOME}`
-      this.cargo = res.CARGO?.DESCRICAO
-    })
-
+      this.name = `${res.NOME} ${res.SOBRENOME}`;
+      this.cargo = res.CARGO?.DESCRICAO;
+      this.isRh = this.cargo === 'Gerente' || this.cargo === 'Diretor Executivo';
+    });
   }
 
-  home() {
-    this.router.navigate(['/home']);
-  }
-
-  profile() {
-    this.router.navigate(['/home/profile']);
-  }
-
-  register() {
-    this.router.navigate(['/home/register']);
-  }
-
-  list() {
-    this.router.navigate(['/home/employee-list']);
-  }
-
-  registerRole() {
-    this.router.navigate(['/home/role-register']);
-  }
-
-  registerDepartments() {
-    this.router.navigate(['/home/department-register']);
-  }
-
-  listDepartments() {
-    this.router.navigate(['/home/department-list']);
-  }
-
-  listRoles() {
-    this.router.navigate(['/home/role-list']);
-  }
-
-  myProfile() {
-    this.router.navigate(['/home/my-profile']);
-  }
-
-  vacations() {
-    this.router.navigate(['/vacation']);
-  }
-
-  readDocs() {
-    this.router.navigate(['/home/docs-list']);
-  }
-
-  sendDocs() {
-    this.router.navigate(['/home/docs-register']);
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
 
   exit() {
     localStorage.clear();
     this.router.navigate(['/login']);
-
-  }
-
-  visit() {
-    this.router.navigate(['/home/visit']);
-  }
-
-  visitReport() {
-    this.router.navigate(['/home/visit-report']);
-  }
-
-  navigateTo(route: string) {
-    console.log(route);
-
-    this.router.navigate([route]);
-  }
-
-  toggleCatalog(event: Event) {
-    event.preventDefault();
-    this.showCatalog = !this.showCatalog;
   }
 }

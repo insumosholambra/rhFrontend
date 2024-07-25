@@ -62,7 +62,8 @@ import Swal from 'sweetalert2';
       VISITA_FUTU: [false],
       NEW_DATE: [''],
       ID: [id],
-      DATA_FORM: [formattedDate]
+      DATA_FORM: [formattedDate],
+      TIPO_CLI: ['']
     });
 
     window.addEventListener('keydown', this.preventEnterKey, true);

@@ -42,8 +42,8 @@ export const routes: Routes = [
       { path: 'visit', component: VisitComponent },
       { path: 'visit-report', component: VisitReportComponent },
       { path: 'catalog/biologicos', component: BiologicosComponent },
-      { path: 'catalog/defensivo', component: DefensivosComponent},
-      { path: 'catalog/fertilizante', component: FertilizantesComponent},
+      { path: 'catalog/defensivos', component: DefensivosComponent},
+      { path: 'catalog/fertilizantes', component: FertilizantesComponent},
       { path: 'catalog/plast', component: PlasticoseTelasComponent},
       { path: 'catalog/embalagens', component: EmbalagensComponent}
 

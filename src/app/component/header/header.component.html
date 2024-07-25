@@ -1,79 +1,136 @@
-<nav class="navbar navbar-expand-lg rounded" aria-label="Thirteenth navbar example" style="background-color: #fd9d43;">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11"
-      aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
+    <a href="/home"><img src="../assets/LogoBranco.svg" width="200" alt="" /></a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-      <a class="navbar-brand col-lg-3 me-0">Insumos Holambra</a>
-      <ul class="navbar-nav col-lg-6 justify-content-lg-center">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+
+    <div class="collapse navbar-collapse ml-3" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{ active: rota === '/home' }" (click)="navigateTo('/home')">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{ active: rota === '/home/profile' }"
+            (click)="navigateTo('/home/profile')">Perfil</a>
+        </li>
+
+        <li class="nav-item dropdown" *ngIf="isRh">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
-            Menu
+            Gerenciamento
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home'}" (click)="home()">Home</a></li>
-
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/profile'}" (click)="profile()">Perfil</a></li>
-            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
-                [ngClass]="{'active': rota === '/home/register'}" (click)="register()">Cadastro de funcionários</a></li>
-            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
-                [ngClass]="{'active': rota === '/home/employee-list'}" (click)="list()">Lista de Funcionários</a></li>
-            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
-                [ngClass]="{'active': rota === '/home/role-register'}" (click)="registerRole()">Cadastro de cargos</a>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/register' }"
+                (click)="navigateTo('/home/register')">Cadastro de Funcionários</a>
             </li>
-            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
-                [ngClass]="{'active': rota === '/home/role-list'}" (click)="listRoles()">Lista de Cargos</a></li>
-            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
-                [ngClass]="{'active': rota === '/home/department-register'}" (click)="registerDepartments()">Cadastro de
-                departamentos</a></li>
-            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
-                [ngClass]="{'active': rota === '/home/department-list'}" (click)="listDepartments()">Lista de
-                departamentos</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/visit'}" (click)="visit()">Cadastrar
-                Visita</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/visit-report'}"
-                (click)="visitReport()">Relatório de Visitas</a></li>
-            <li><a class="dropdown-item" [ngClass]="{'active': rota === '/home/docs-list'}"
-                (click)="readDocs()">Documentos e Arquivos</a></li>
-            <li><a class="dropdown-item" *ngIf="cargo === 'Gerente' || cargo === 'Diretor Executivo'"
-                [ngClass]="{'active': rota === '/home/docs-register'}" (click)="sendDocs()">Envio de arquivos</a></li>
-            <li class="dropdown-submenu">
-              <a class="dropdown-item dropdown-toggle" href="#" (click)="toggleCatalog($event)">Catálogo</a>
-              <ul class="dropdown-menu" [class.show]="showCatalog">
-                <li><a class="dropdown-item" [ngClass]="{'active': rota === '/catalog/defensivos'}" [routerLink]="['/home/catalog/defensivo']" routerLinkActive="router-link-active">Defensivos</a></li>
-                <li><a class="dropdown-item" [ngClass]="{'active': rota === '/catalog/fertilizantes'}" [routerLink]="['/home/catalog/fertilizante']">Fertilizantes</a></li>
-                <li><a class="dropdown-item" [ngClass]="{'active': rota === '/catalog/biologicos'}" [routerLink]="['/home/catalog/biologicos']">Biológicos</a></li>
-                <li><a class="dropdown-item" [ngClass]="{'active': rota === '/catalog/plast'}" [routerLink]="['/home/catalog/plast']">Plásticos e Telas</a></li>
-                <li><a class="dropdown-item" [ngClass]="{'active': rota === '/catalog/embalagens'}" [routerLink]="['/home/catalog/embalagens']">Embalagens</a></li>
-
-              </ul>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/employee-list' }"
+                (click)="navigateTo('/home/employee-list')">Lista de Funcionários</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/role-register' }"
+                (click)="navigateTo('/home/role-register')">Cadastro de Cargos</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/role-list' }"
+                (click)="navigateTo('/home/role-list')">Lista de Cargos</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/department-register' }"
+                (click)="navigateTo('/home/department-register')">Cadastro de Departamentos</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/department-list' }"
+                (click)="navigateTo('/home/department-list')">Lista de Departamentos</a>
             </li>
           </ul>
         </li>
-      </ul>
 
-      <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-        <div>
-          <h2>{{ name }}</h2>
-          <h5>{{ cargo }}</h5>
-        </div>
-        <div style="padding: 3px; margin-left: 10px; cursor: pointer;">
-          <a (click)="exit()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-              class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-              <path fill-rule="evenodd"
-                d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
-              <path fill-rule="evenodd"
-                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
-            </svg>
+        <div class="dropdown nav-item">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Visitas
           </a>
+          <ul class="dropdown-menu" aria-labelledby="catalogDropdown">
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/visit' }"
+                (click)="navigateTo('/home/visit')">Cadastrar Visita</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/visit-report' }"
+                (click)="navigateTo('/home/visit-report')">Relatório de Visitas</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- <li class="nav-item">
+          <a class="nav-link" [ngClass]="{ active: rota === '/home/visit' }"
+            (click)="navigateTo('/home/visit')">Cadastrar Visita</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{ active: rota === '/home/visit-report' }"
+            (click)="navigateTo('/home/visit-report')">Relatório de Visitas</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{ active: rota === '/home/docs-list' }"
+            (click)="navigateTo('/home/docs-list')">Documentos e Arquivos</a>
+        </li>
+        <li class="nav-item" *ngIf="isRh">
+          <a class="nav-link" [ngClass]="{ active: rota === '/home/docs-register' }"
+            (click)="navigateTo('/home/docs-register')">Envio de Arquivos</a>
+        </li>
+        <div class="dropdown nav-item">
+          <a class="nav-link dropdown-toggle" [ngClass]="{ active: rota === '/home/catalog' }" id="catalogDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Catálogo
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="catalogDropdown">
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/catalog/defensivos' }"
+                (click)="navigateTo('/home/catalog/defensivos')">Defensivos</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/catalog/fertilizantes' }"
+                (click)="navigateTo('/home/catalog/fertilizantes')">Fertilizantes</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/catalog/biologicos' }"
+                (click)="navigateTo('/home/catalog/biologicos')">Biológicos</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/catalog/plast' }"
+                (click)="navigateTo('/home/catalog/plast')">Plásticos e Telas</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [ngClass]="{ active: rota === '/home/catalog/embalagens' }"
+                (click)="navigateTo('/home/catalog/embalagens')">Embalagens</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="catalogDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Catálogo
+          </a>
+
+        </li> -->
+      </ul>
+      <div class="d-flex align-items-center">
+        <div class="me-3 text-end">
+          <h4 class="mb-0">{{ name }}</h4>
+          <small>{{ cargo }}</small>
+        </div>
+        <div>
+          <a (click)="exit()" class="btn btn-outline-secondary btn-sm">Sair</a>
         </div>
       </div>
     </div>
   </div>
 </nav>
-<div class="back" *ngIf="!isHome">
-  <button (click)="back()">Voltar</button>
+<div class="back mt-3" *ngIf="!isHome">
+  <button class="btn btn-secondary" (click)="back()">Voltar</button>
 </div>

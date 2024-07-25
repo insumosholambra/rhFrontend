@@ -22,6 +22,11 @@ export class UserService {
     return this.http.get<Employee>(`${this.api}/users/${id}`);
   }
 
+  getUserPhoto(id: number): Observable<Blob> {
+    return this.http.get(`${this.api}/users/${id}/photo`, { responseType: 'blob' });
+  }
+
+
   newEmployee(user: any): Observable<any> {
     return this.http.post<any>(`${this.api}/users`, user);
   }

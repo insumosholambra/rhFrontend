@@ -49,30 +49,7 @@ export class EmployeeListComponent implements OnInit {
 
   selectedEmployee!: Employee;
   employees: Employee[] = [];
-  employee: Employee = {
-    ID: 0,
-    PASSWORD: '',
-    NOME: '',
-    SOBRENOME: '',
-    CPF: '',
-    RG: '',
-    DATA_NASCTO: '',
-    ENDERECO: '',
-    BAIRRO: '',
-    CIDADE: '',
-    ESTADO: '',
-    TELEFONE: '',
-    TEL_COMERCIAL: '',
-    RAMAL: '',
-    EMAIL: '',
-    DEPARTAMENTO: { ID: 0, DESCRICAO: '' },
-    CARGO: { ID: 0, DESCRICAO: '' },
-    SALDO_FERIAS: 0,
-    ULTIMO_PERIODO_FERIAS: '0',
-    DATA_CADASTRO: '0',
-    MATRICULA: 0
-  };
-
+  employee: Employee[] = []
   displayedColumns: string[] = ['nome', 'cpf', 'rg', 'nascimento', 'endereco', 'bairro', 'cidade', 'estado', 'telefone', 'telComercial', 'ramal', 'email', 'departamento', 'cargo', 'saldoFerias', 'acao'];
 
 

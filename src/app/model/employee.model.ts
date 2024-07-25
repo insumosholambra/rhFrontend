@@ -23,4 +23,5 @@ export interface Employee {
   ULTIMO_PERIODO_FERIAS: string | null;
   SALDO_FERIAS: number | null;
   MATRICULA: number;
+  FOTO?: string | ArrayBuffer; // Adiciona a propriedade FOTO, pode ser uma URL ou um ArrayBuffer
 }
