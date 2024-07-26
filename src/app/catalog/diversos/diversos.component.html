@@ -8,12 +8,12 @@
 
   gtag('config', 'G-B2SM11FJCT');
 </script>
-  
+
   <div>
     <img src="../assets/images/Diversos.webp" alt="Diversos"  style="width: 100%;">
 
     <!-- Barra com o alfabeto -->
-  
+
     <div class="alphabet-bar">
       <span *ngFor="let letter of alphabet" (click)="filterByLetter(letter)">{{ letter }}</span>
     </div>
@@ -28,8 +28,8 @@
 
 
       <!-- <select class="form-control" [(ngModel)]="selectedFamily" (change)="filterByFamily()" placeholder="Busque aqui">
-         <option value="">Filtrar por Família</option> 
-          
+         <option value="">Filtrar por Família</option>
+
         <option *ngFor="let family of uniqueFamilies" [value]="family"><svg cIcon name="cilMenu" size="lg"></svg>{{ family }}</option>
         <i class="cil-filter"></i>
       </select> -->
@@ -53,7 +53,7 @@
       </mat-form-field>
 
     </div>
-  
+
     <!-- Tabela com os dados filtrados -->
     <div class="table">
       <table>
@@ -71,8 +71,10 @@
             <td>{{ dado.DESCRICAO }}</td>
             <td>{{ dado.UNIDADE }}</td>
             <td>{{ dado.FAMILIA }}</td>
-            <td *ngIf="dado.SALDO_DISPONIVEL != 0 || dado.SALDO > 0" [ngClass]="{'green-circle': dado.SALDO_DISPONIVEL != 0 || dado.SALDO > 0}"></td>
-            <td *ngIf="dado.SALDO_DISPONIVEL == 0 || dado.SALDO < 0" [ngClass]="{'green-red': dado.SALDO_DISPONIVEL == 0 || dado.SALDO < 0}"></td>         
+            <td *ngIf=" dado.SALDO_DISPONIVEL > 0 || dado.SALDO > 0"
+              [ngClass]="{'green-circle': dado.SALDO_DISPONIVEL > 0 || dado.SALDO > 0}"></td>
+            <td *ngIf="dado.SALDO_DISPONIVEL <= 0 || dado.SALDO < 0"
+              [ngClass]="{'green-red': dado.SALDO_DISPONIVEL <= 0 || dado.SALDO < 0}"></td>
           </tr>
         </tbody>
       </table>

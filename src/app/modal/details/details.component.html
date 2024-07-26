@@ -10,12 +10,14 @@
     >
       <h1>Detalhes da Visita</h1>
       <h2>{{ visit.NOME }} {{ visit.SOBRENOME }}</h2>
+
       <div class="details">
         <label for="data-visita">Data da Visita:</label>
         <div class="value" id="data-visita">
           {{ visit.DATA_VISITA | date : "dd/MM/yyyy" }}
         </div>
       </div>
+
       <div class="details">
         <label for="cliente">Cliente:</label>
         <div class="value" id="cliente">{{ visit.CLIENTE }}</div>

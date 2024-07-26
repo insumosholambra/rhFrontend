@@ -73,8 +73,10 @@
         <td>{{ dado.DESCRICAO }}</td>
         <td>{{ dado.UNIDADE }}</td>
         <td>{{ dado.FAMILIA }}</td>
-        <td *ngIf="dado.SALDO_DISPONIVEL > 0 || dado.SALDO > 0" [ngClass]="{'green-circle': dado.SALDO_DISPONIVEL > 0 || dado.SALDO > 0}"></td>
-        <td *ngIf="dado.SALDO_DISPONIVEL == 0 || dado.SALDO < 0" [ngClass]="{'green-red': dado.SALDO_DISPONIVEL == 0 || dado.SALDO < 0}"></td>
+        <td *ngIf=" dado.SALDO_DISPONIVEL > 0 || dado.SALDO > 0"
+          [ngClass]="{'green-circle': dado.SALDO_DISPONIVEL > 0 || dado.SALDO > 0}"></td>
+        <td *ngIf="dado.SALDO_DISPONIVEL <= 0 || dado.SALDO < 0"
+          [ngClass]="{'green-red': dado.SALDO_DISPONIVEL <= 0 || dado.SALDO < 0}"></td>
       </tr>
     </tbody>
   </table>

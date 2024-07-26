@@ -67,6 +67,21 @@
           </ul>
         </div>
 
+        <div class="dropdown nav-item">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Documentos e Arquivos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="catalogDropdown">
+            <li class="nav-item">
+              <a class="nav-link text-black" [ngClass]="{ active: rota === '/home/docs-list' }" (click)="navigateTo('/home/docs-list')">Documentos e Arquivos</a>
+            </li>
+            <li class="nav-item" *ngIf="isRh">
+              <a class="nav-link text-black" [ngClass]="{ active: rota === '/home/docs-register' }" (click)="navigateTo('/home/docs-register')">Envio de Arquivos</a>
+            </li>
+          </ul>
+        </div>
+
         <!-- <li class="nav-item">
           <a class="nav-link" [ngClass]="{ active: rota === '/home/visit' }"
             (click)="navigateTo('/home/visit')">Cadastrar Visita</a>
@@ -75,17 +90,12 @@
           <a class="nav-link" [ngClass]="{ active: rota === '/home/visit-report' }"
             (click)="navigateTo('/home/visit-report')">Relatório de Visitas</a>
         </li> -->
-        <li class="nav-item">
-          <a class="nav-link" [ngClass]="{ active: rota === '/home/docs-list' }" (click)="navigateTo('/home/docs-list')">Documentos e Arquivos</a>
-        </li>
 
-        <li class="nav-item" *ngIf="isRh">
-          <a class="nav-link" [ngClass]="{ active: rota === '/home/docs-register' }" (click)="navigateTo('/home/docs-register')">Envio de Arquivos</a>
+
+
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{ active: rota === '/vacation' }" (click)="navigateTo('/vacation')">Férias</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" [ngClass]="{ active: rota === '/vacation' }"
-            (click)="navigateTo('/vacation')">Férias</a>
-        </li> -->
         <div class="dropdown nav-item">
           <a class="nav-link dropdown-toggle" [ngClass]="{ active: rota === '/home/catalog' }" id="catalogDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">

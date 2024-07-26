@@ -90,3 +90,7 @@ small{
 .nav-link{
   font-size: 17px;
 }
+
+.text-black{
+  color: black !important;
+}

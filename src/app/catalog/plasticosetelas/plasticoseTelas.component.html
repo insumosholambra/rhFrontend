@@ -54,7 +54,6 @@
 
   </div>
 
-  <!-- Tabela com os dados filtrados -->
   <div class="table">
     <table>
       <thead>
@@ -66,13 +65,14 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Loop para exibir os dados filtrados -->
         <tr *ngFor="let dado of filteredplastelas | paginate: { itemsPerPage: 15, currentPage: p, id: 'fertilizantesList' } " style="border-right: solid 1px #bbbbbb; border: #bbbbbb solid 1px; ">
           <td>{{ dado.DESCRICAO }}</td>
           <td>{{ dado.UNIDADE }}</td>
           <td>{{ dado.FAMILIA }}</td>
-          <td *ngIf="dado.SALDO_DISPONIVEL != 0 || dado.SALDO > 0" [ngClass]="{'green-circle': dado.SALDO_DISPONIVEL != 0 || dado.SALDO > 0}"></td>
-          <td *ngIf="dado.SALDO_DISPONIVEL == 0 || dado.SALDO < 0" [ngClass]="{'green-red': dado.SALDO_DISPONIVEL == 0 || dado.SALDO < 0}"></td>
+          <td *ngIf=" dado.SALDO_DISPONIVEL > 0 || dado.SALDO > 0"
+            [ngClass]="{'green-circle': dado.SALDO_DISPONIVEL > 0 || dado.SALDO > 0}"></td>
+          <td *ngIf="dado.SALDO_DISPONIVEL <= 0 || dado.SALDO < 0"
+            [ngClass]="{'green-red': dado.SALDO_DISPONIVEL <= 0 || dado.SALDO < 0}"></td>
         </tr>
       </tbody>
     </table>
