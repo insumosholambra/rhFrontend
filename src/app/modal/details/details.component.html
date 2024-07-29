@@ -171,27 +171,11 @@
     </div>
   </div>
 
-  <div
-    style="
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    "
-  >
-    <button
-      class="btn btn-primary"
-      (click)="printPdf()"
-      style="
-        margin-top: 10px;
-        width: 200px;
-        height: 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      "
-    >
+  <div style=" width: 100%; display: flex; justify-content: center; align-items: center;" >
+    <div id="loading" style="display: none">
+      <div class="loader"></div>
+    </div>
+    <button class="btn btn-primary" id="button" (click)="printPdf()">
       Salvar como PDF
     </button>
   </div>
