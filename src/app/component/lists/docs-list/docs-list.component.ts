@@ -37,7 +37,11 @@ export class DocsListComponent {
   download(item: string) {
     this.docsList.downloadDoc(item).subscribe(blob => {
       const url = window.URL.createObjectURL(blob);
-      window.open(url);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = item;
+      a.click();
+      window.URL.revokeObjectURL(url);
     }, error => {
       console.error('Erro ao baixar o arquivo:', error);
     });
